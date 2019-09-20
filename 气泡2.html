@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .dialog {
+            width: 300px;
+            height: 100px;
+            position: relative;
+            background-color: #09F;
+            margin-left: 200px;
+        }
+
+        .dialog .arrow {
+            position: absolute;
+            width: 16px;
+            height: 24px;
+            left: -16px;
+            bottom: 10px;
+        }
+
+        .dialog .arrow * {
+            display: block;
+            position: absolute;
+            border-style: dashed solid solid dashed;
+            font-size: 0;
+            line-height: 0;
+        }
+
+        .dialog .arrow span {
+            border-width: 4px 8px;
+            border-color: transparent #FFF #FFF transparent;
+            bottom: 0;
+        }
+
+        .dialog .arrow em {
+            border-color: transparent #09F #09F transparent;
+            border-width: 12px 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dialog">
+        <div class="arrow">
+            <em></em><span></span>
+        </div>
+        CSS气泡框实现
+    </div>
+
+</body>
+
+</html>

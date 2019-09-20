@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .outer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            background: red;
+        }
+
+        .outer:hover {
+            background: yellow;
+        }
+
+        .inner {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            margin: auto;
+        }
+
+        .bottom {
+            width: 100%;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<!-- 此时验证并不存在问题 -->
+
+<body>
+    <div class="outer">
+        <div class="inner">我是中间层</div>
+    </div>
+    <div class="bottom"></div>
+
+</body>
+
+</html>

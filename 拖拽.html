@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.gridster/0.5.6/jquery.gridster.js"></script>
+    <link href="https://cdn.bootcss.com/jquery.gridster/0.5.6/jquery.gridster.css" rel="stylesheet">
+
+    <style>
+        .gridster ul {
+            margin: 0;
+        }
+
+        .gridster ul li {
+            list-style-type: none;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .gridster ul li header {
+            background: #999;
+            display: block;
+            font-size: 20px;
+            line-height: normal;
+            padding: 4px 0px 6px;
+            margin-bottom: 20px;
+            cursor: move;
+            text-align: center;
+        }
+    </style>
+</head>
+<!-- 文章链接：https://my.oschina.net/GracefulTing/blog/1649229 -->
+
+<body>
+    <div class="gridster">
+        <ul>
+            <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">
+                <!-- 这里写了一个header，对应配置里面的handle，鼠标落到header上面可以拖，而不是整个块 -->
+                <header>|||</header>
+                0
+            </li>
+            <li data-row="1" data-col="3" data-sizex="1" data-sizey="2">
+                <header>|||</header>
+                1
+            </li>
+            <li data-row="3" data-col="1" data-sizex="3" data-sizey="2">
+                <!-- 这里写了一个header，对应配置里面的handle，鼠标落到header上面可以拖，而不是整个块 -->
+                <header>|||</header>
+                3
+            </li>
+            <li data-row="1" data-col="3" data-sizex="1" data-sizey="2">
+                <header>|||</header>
+                2
+            </li>
+            <li data-row="3" data-col="4" data-sizex="1" data-sizey="2">
+                <header>|||</header>
+                4
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var gridster;
+    $(function () {
+        gridster = $(".gridster ul").gridster({
+            widget_base_dimensions: [100, 100],        //模块宽高[宽，高]
+            widget_margins: [5, 5],　　　　　　　//模块间距[上下，左右]
+            draggable: {
+                handle: 'header'        //拖动元素
+            },
+            resize: {
+                enabled: true
+            }
+        }).data('gridster');
+    })
+</script>
+
+</html>

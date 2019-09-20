@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .content {
+            width: 400px;
+            height: 200px;
+        }
+
+        .left {
+            width: 100px;
+            background: red;
+            height: 100%;
+            float: left;
+        }
+
+        .right {
+            background: blue;
+            height: 100%;
+            /* width: calc(100% - 100px);//此句可以不用 */
+            margin-left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+</body>
+
+</html>
