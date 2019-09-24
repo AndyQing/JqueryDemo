@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // 得到所有对象中的keys属性
+    const keysArr = [];
+    getAllKeys = (list) => list.map((item) => {
+        keysArr.push(item.keys);
+        if (item.content) {
+            this.getAllKeys(item.content);
+        }
+    })
+    // 去除所有对象中的name属性
+    initList = (list) => list.map((item) => {
+        var tempObj = {};
+        for (var obj in item) {
+            if (obj != 'name') {
+                tempObj[obj] = item[obj];
+            }
+        }
+
+        if (item.content) {
+            tempObj.content = this.initList(item.content);
+            return tempObj;
+        } else {
+            tempObj.content = [];
+            return tempObj;
+        }
+    });
+
+
+    let listTemp = [
+        {
+            name: '111',
+            keys: 'qw',
+            content: [{
+                name: '111-2',
+                keys: 'qw-2',
+                content: [{
+                    name: '111-3',
+                    keys: 'qw-3',
+                    content: []
+                }]
+            }]
+        },
+        {
+            name: '222',
+            keys: 'as',
+            content: []
+        }
+    ];
+    this.getAllKeys(listTemp);
+    console.log("keysArr---", keysArr);
+    let tempArr = this.initList(listTemp);
+    console.log("tempArr---", tempArr);
+</script>
+
+</html>

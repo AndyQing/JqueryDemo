@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <style>
+        .choise>input {
+            /* 将比较丑的那个框去掉 */
+            display: none;
+        }
+
+        .choise>label {
+            position: relative;
+            margin-right: 34px;
+        }
+
+        .choise>label::before {
+            /* 添加未选择时的空心圆圈 */
+            display: inline-block;
+            content: "";
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid rgb(219, 219, 219);
+            margin-right: 6px;
+            vertical-align: bottom;
+        }
+
+        .choise>input:checked+label::before {
+            background-color: rgb(239, 66, 56);
+        }
+
+        .choise>input:checked+label::after {
+            display: inline-block;
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            position: absolute;
+            left: 6px;
+            bottom: 6px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 原始样式 -->
+    <input type="radio" name="gender" value="male" checked>男
+    <input type="radio" name="gender" value="female">女
+    <!-- 修改过的样式 -->
+    <div class="choise">
+        <input type="radio" name="paixu" value="1" id="paixu1" checked>
+        <label for="paixu1" style="cursor:pointer">按热门排序</label>
+        <input type="radio" name="paixu" value="2" id="paixu2">
+        <label for="paixu2" style="cursor:pointer">按时间排序</label>
+        <input type="radio" name="paixu" value="3" id="paixu3">
+        <label for="paixu3" style="cursor:pointer">按评价排序</label>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        // 监听单选框
+        $('.choise input[type=radio][name=paixu]').change(function () {
+            if (this.value == '1') {
+                alert("1----");
+            } else if (this.value == '2') {
+                alert("2----");
+            } else if (this.value == '3') {
+                alert("3----");
+            }
+        });
+    });
+</script>
+
+</html>
