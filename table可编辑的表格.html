@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>table可编辑的表格!</title>
+
+    <!-- <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" > -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css">
+</head>
+
+<body>
+    <!-- 表格： -->
+    <div class="table-box" style="margin: 20px;">
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">insertRow</button>
+            <button id="getTableData" class="btn btn-default">getTableData</button>
+        </div>
+        <!-- data-resizable="true"表示可以拖动列 -->
+        <table id="table2" data-resizable="true"></table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" ></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script> -->
+    <script src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>
+    <!-- <script
+        src="https://unpkg.com/bootstrap-table@1.15.4/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script> -->
+
+    <script>
+        $(function () {
+            let $table = $('#table2');
+            let $button = $('#button');
+            let $getTableData = $('#getTableData');
+
+            $button.click(function () {
+                $table.bootstrapTable('insertRow', {
+                    index: 0,
+                    row: {
+                        id: '',
+                        name: '',
+                        price: ''
+                    }
+                });
+            });
+
+            $table.bootstrapTable({
+                columns: [
+                    {
+                        checkbox: true
+                    }, {
+                        field: 'id',
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return value;
+                        }
+                    }, {
+                        field: 'name',
+                        title: '名称'
+                    }, {
+                        field: 'price',
+                        title: '品牌规格及型号'
+                    }, {
+                        field: 'price1',
+                        title: '数量'
+                    }, {
+                        field: 'price2',
+                        title: '单位'
+                    }, {
+                        field: 'price3',
+                        title: '单价（元）'
+                    }, {
+                        field: 'price4',
+                        title: '总价（元）'
+                    }, {
+                        field: 'price5',
+                        title: '是否属于小、微型企业的产品'
+                    }, {
+                        field: 'price6',
+                        title: '是否属于残疾人福利单位的产品'
+                    }, {
+                        field: 'price7',
+                        title: '是否属于监狱企业的产品'
+                    }, {
+                        field: 'price8',
+                        title: '是否属于节能产品'
+                    }, {
+                        field: 'price9',
+                        title: '是否属于环境标志产品'
+                    }
+                ],
+                data: [{
+                    id: 1,
+                    name: 'Item 1',
+                    price: '$1'
+                }, {
+                    id: 2,
+                    name: 'Item 2',
+                    price: '$2'
+                }],
+                /**
+                添加下面的方法后，表格可以编辑
+                 * @param {点击列的 field 名称} field
+                 * @param {点击列的 value 值} value
+                 * @param {点击列的整行数据} row
+                 * @param {td 元素} $element
+                 */
+                onClickCell: function (field, value, row, $element) {
+                    console.log(field, value, row);
+                    if (field !== 'id') {//设置序号列不可以编辑
+                        $element.attr('contenteditable', true);
+                        $element.blur(function () {
+                            let index = $element.parent().data('index');
+                            let tdValue = $element.html();
+
+                            saveData(index, field, tdValue);
+                        })
+                    }
+                }
+            });
+
+            $getTableData.click(function () {
+                alert(JSON.stringify($table.bootstrapTable('getData')));
+            });
+
+            function saveData(index, field, value) {
+                $table.bootstrapTable('updateCell', {
+                    index: index,       //行索引
+                    field: field,       //列名
+                    value: value        //cell值
+                })
+            }
+
+        });
+    </script>
+</body>
+
+</html>

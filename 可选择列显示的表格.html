@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>不可编辑但合并单元格的Table!</title>
+    <title>合并单元格的Table!</title>
 
     <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -16,20 +16,15 @@
 </head>
 
 <body>
-    <div class="table-box" style="margin: 20px;">
-        <div id="toolbar">
-            <button id="button" class="btn btn-default">insertRow</button>
-            <button id="getTableData" class="btn btn-default">getTableData</button>
-        </div>
-        <table id="table2" data-show-footer="true"></table>
-    </div>
-    <table data-toggle="table" data-search="true" data-pagination="true" id="table" data-search="true"
+    <!-- 表格1：可拖动，不可编辑 -->
+    <!-- 注：去掉data-show-footer="true"属性后，就不可以拖动了 -->
+    <table id="table3" data-toggle="table" data-search="true" data-pagination="true"  data-search="true"
         data-show-refresh="true" data-show-toggle="true" data-show-fullscreen="true" data-show-columns="true"
         data-detail-view="true" data-show-export="true" data-click-to-select="true"
         data-detail-formatter="detailFormatter" data-minimum-count-columns="1" data-show-pagination-switch="true"
         data-id-field="id" data-page-list="[10, 25, 50, 100, all]" data-show-footer="true" data-side-pagination="server"
         data-resizable="true">
-        <!-- <thead>
+         <thead>
             <tr>
                 <th colspan="2">Item Detail</th>
                 <th data-field="id2">Item Detail22</th>
@@ -54,7 +49,7 @@
                 <td>222-2</td>
                 <td>$2</td>
             </tr>
-        </tbody> -->
+        </tbody>
         <!-- <thead>
             <tr>
                 <th data-field="id">Item ID</th>
@@ -75,6 +70,17 @@
             </tr>
         </tbody> -->
     </table>
+    <hr />
+    <!-- 表格2：可编辑，不可拖动， -->
+    <div class="table-box" style="margin: 20px;">
+        <div id="toolbar">
+            <button id="button" class="btn btn-default">insertRow</button>
+            <button id="getTableData" class="btn btn-default">getTableData</button>
+        </div>
+        <!-- data-resizable="true"表示可以拖动列 -->
+        <table id="table2" data-resizable="true"></table>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -89,7 +95,6 @@
     <script
         src="https://unpkg.com/bootstrap-table@1.15.4/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
     <script>
-
         $("#table").bootstrapTable({
             // url: 'data2.json',
             columns: [
@@ -178,78 +183,6 @@
                 $(this).remove();
             }
         })
-
-        // $('#table').bootstrapTable({
-        //     columns: [ [
-        //             {
-        //                 "title": "洗衣机统计表",
-        //                 "halign":"center",
-        //                 "align":"center",
-        //                 "colspan": 5
-        //             }
-        //         ],
-        //         [
-        //             {
-        //                 field: 'name',
-        //                 title: "功能分组",
-        //                 valign:"middle",
-        //                 align:"center",
-        //                 colspan: 1,
-        //                 rowspan: 2
-        //             },
-        //             {
-        //                 title: "美的",
-        //                 valign:"middle",
-        //                 align:"center",
-        //                 colspan: 2,
-        //                 rowspan: 1
-        //             },
-        //             {
-        //                 title: "松下",
-        //                 valign:"middle",
-        //                 align:"center",
-        //                 colspan: 2,
-        //                 rowspan: 1
-        //             }
-        //         ],
-        //         [
-        //             {
-        //                 field: 'mideaNum',
-        //                 title: '数量',
-        //                 valign:"middle",
-        //                 align:"center"
-        //             },
-        //             {
-        //                 field: 'mideaPercent',
-        //                 title: '占比',
-        //                 valign:"middle",
-        //                 align:"center"
-        //             },
-        //             {
-        //                 field: 'panasonicNum',
-        //                 title: '数量',
-        //                 valign:"middle",
-        //                 align:"center"
-        //             },
-        //             {
-        //                 field: 'panasonicPercent',
-        //                 title: '占比',
-        //                 valign:"middle",
-        //                 align:"center"
-        //             }
-        //         ]
-        //     ],
-        //     data: [{
-        //         id: 1,
-        //         name: 'Item 1',
-        //         price: '$1'
-        //     }, {
-        //         id: 2,
-        //         name: 'Item 2',
-        //         price: '$2'
-        //     }]
-        // })
-
     </script>
     <script>
         $(function () {
@@ -272,25 +205,27 @@
                 // url: 'data2.json',
                 // cache: false,
                 // toolbar: '#toolbar',
-                clickEdit: true,
-                showToggle: true,
-                pagination: true,       //显示分页条
-                showColumns: true,
-                showPaginationSwitch: true,     //显示切换分页按钮
-                showRefresh: true,      //显示刷新按钮
-                //clickToSelect: true,  //点击row选中radio或CheckBox
-                columns: [{
-                    checkbox: true
-                }, {
-                    field: 'id',
-                    title: 'Item ID'
-                }, {
-                    field: 'name',
-                    title: 'Item Name'
-                }, {
-                    field: 'price',
-                    title: 'Item Price'
-                },],
+                // clickEdit: true,
+                // showToggle: true,
+                // pagination: true,       //显示分页条
+                // showColumns: true,
+                // showPaginationSwitch: true,     //显示切换分页按钮
+                // showRefresh: true,      //显示刷新按钮
+                clickToSelect: true,  //点击row选中radio或CheckBox
+                columns: [
+                    {
+                        checkbox: true
+                    }, {
+                        field: 'id',
+                        title: 'Item ID'
+                    }, {
+                        field: 'name',
+                        title: 'Item Name'
+                    }, {
+                        field: 'price',
+                        title: 'Item Price'
+                    }
+                ],
                 data: [{
                     id: 1,
                     name: 'Item 1',

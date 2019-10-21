@@ -10,16 +10,50 @@
 </head>
 <style>
     .icon {
-        width: 100px;
-        height: 100px;
-        color: red;
+        /* 下面这个fill属性很重要 */
+        fill: currentColor;
+        overflow: hidden;
+    }
+
+    .svgimg {
+        position: relative;
+        left: 0;
+        margin-bottom: .1rem;
+        filter: drop-shadow(red 80px 0);
+        border-left: 30px solid transparent;
+        border-right: 30px solid transparent;
     }
 </style>
 
 <body>
-    <svg class="icon svg-icon" aria-hidden="true">
-        <use xlink:href="#icon-shouye"></use>
+    <!-- 使用symbol引用：需要引入js文件，可以改颜色，链接：https://www.iconfont.cn/help/detail?spm=a313x.7781069.1998910419.d8cf4382a&helptype=code -->
+    <svg class="icon" aria-hidden="true" style="color: red;">
+        <use xlink:href="#icon-publishgoods_fill"></use>
     </svg>
+    <!-- '复制svg'方法：可以改颜色 -->
+    <i style="color: blue;">
+        <svg t="1571625487296" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="2320"  width='9' height='9'>
+            <path
+                d="M512 34.0992A479.232 479.232 0 0 1 989.9008 512 479.232 479.232 0 0 1 512 989.9008 479.232 479.232 0 0 1 34.0992 512 479.232 479.232 0 0 1 512 34.0992z m173.2608 286.72L476.16 529.92 362.7008 416.4608l-83.6608 83.5584L476.16 697.1392 768.8192 404.48l-83.5584-83.6608z"
+                p-id="2321"></path>
+        </svg>
+    </i>
+
+    <!-- 'svg下载'方法：貌似还改不了颜色 -->
+    <img src="./images/gou.svg" class="svgimg" alt="">
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width: 300px; height: 250px">
+        <rect x="50" y="20" rx="10" ry="10" width="200" height="200" style="fill:red; stroke:black; stroke-width:3"
+            id="rect" />
+    </svg>
+    <script>
+        function setColor(color) {
+            document.getElementById("rect").style.fill = color;
+        }
+        setColor('green')
+    </script>
 </body>
 
 </html>
