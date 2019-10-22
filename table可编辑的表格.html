@@ -5,12 +5,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>table可编辑的表格!</title>
+    <title>用bootstrap-table实现table可编辑的表格!</title>
 
     <!-- <link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" > -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css">
+    <style>
+        #table2 tfoot {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,6 +25,7 @@
             <button id="button" class="btn btn-default">insertRow</button>
             <button id="getTableData" class="btn btn-default">getTableData</button>
         </div>
+        <p>总价（大写）：<span id="totalMoney"></span></p>
         <!-- data-resizable="true"表示可以拖动列 -->
         <table id="table2" data-resizable="true"></table>
     </div>
@@ -50,6 +56,7 @@
             });
 
             $table.bootstrapTable({
+                showFooter: true,//求和，必须有这个属性
                 columns: [
                     {
                         checkbox: true
@@ -61,13 +68,16 @@
                         }
                     }, {
                         field: 'name',
-                        title: '名称'
+                        title: '名称',
+                        footerFormatter: nameFormatter,
                     }, {
                         field: 'price',
                         title: '品牌规格及型号'
                     }, {
                         field: 'price1',
-                        title: '数量'
+                        title: '数量',
+                        formatter: numFormatter,
+                        footerFormatter: numCount,
                     }, {
                         field: 'price2',
                         title: '单位'
@@ -76,7 +86,9 @@
                         title: '单价（元）'
                     }, {
                         field: 'price4',
-                        title: '总价（元）'
+                        title: '总价（元）',
+                        formatter: numFormatter,
+                        footerFormatter: moneyFormatter,
                     }, {
                         field: 'price5',
                         title: '是否属于小、微型企业的产品'
@@ -97,11 +109,13 @@
                 data: [{
                     id: 1,
                     name: 'Item 1',
-                    price: '$1'
+                    price: '$1',
+                    price1: '2'
                 }, {
                     id: 2,
                     name: 'Item 2',
-                    price: '$2'
+                    price: '$2',
+                    price1: '3'
                 }],
                 /**
                 添加下面的方法后，表格可以编辑
@@ -111,7 +125,7 @@
                  * @param {td 元素} $element
                  */
                 onClickCell: function (field, value, row, $element) {
-                    console.log(field, value, row);
+                    // console.log(field, value, row);
                     if (field !== 'id') {//设置序号列不可以编辑
                         $element.attr('contenteditable', true);
                         $element.blur(function () {
@@ -125,7 +139,12 @@
             });
 
             $getTableData.click(function () {
-                alert(JSON.stringify($table.bootstrapTable('getData')));
+                var tableData = $table.bootstrapTable('getData');
+                for (var i = 0; i < tableData.length; i++) {
+                    tableData[i].price1 = parseFloat(tableData[i].price1)
+                }
+                alert(JSON.stringify(tableData));
+                console.log("tableData---", tableData)
             });
 
             function saveData(index, field, value) {
@@ -137,6 +156,77 @@
             }
 
         });
+        function nameFormatter(data) {
+            // console.log('data.length---', data.length);
+            return data.length
+        }
+        function numFormatter(value) {//将输入的文字转成数字
+            var valueTemp = parseFloat(value);
+            if (Object.is(valueTemp, NaN)) {
+                return '';
+            } else {
+                return valueTemp
+            }
+        }
+        function numCount(data) {
+            // console.log('data---', data);
+            var count = 0;
+            for (var i = 0; i < data.length; i++) {
+                var valueTemp = parseFloat(data[i].price1);
+                if (Object.is(valueTemp, NaN)) {
+                    count += 0;
+                } else {
+                    count += valueTemp;
+                }
+            }
+            console.log('count---', count);
+            return count
+        }
+        function moneyFormatter(data) {
+            var count = 0;
+            for (var i = 0; i < data.length; i++) {
+                var valueTemp = parseFloat(data[i].price4);
+                if (Object.is(valueTemp, NaN)) {
+                    count += 0;
+                } else {
+                    count += valueTemp;
+                }
+            }
+            $('#totalMoney').html(count + "," + digitUppercase(count));
+            console.log('total---', count);
+            return count
+        }
+        // 数字转成大写
+        var digitUppercase = function (n) {
+            var fraction = ['角', '分'];
+            var digit = [
+                '零', '壹', '贰', '叁', '肆',
+                '伍', '陆', '柒', '捌', '玖'
+            ];
+            var unit = [
+                ['元', '万', '亿'],
+                ['', '拾', '佰', '仟']
+            ];
+            var head = n < 0 ? '欠' : '';
+            n = Math.abs(n);
+            var s = '';
+            for (var i = 0; i < fraction.length; i++) {
+                s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+            }
+            s = s || '整';
+            n = Math.floor(n);
+            for (var i = 0; i < unit[0].length && n > 0; i++) {
+                var p = '';
+                for (var j = 0; j < unit[1].length && n > 0; j++) {
+                    p = digit[n % 10] + unit[1][j] + p;
+                    n = Math.floor(n / 10);
+                }
+                s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+            }
+            return head + s.replace(/(零.)*零元/, '元')
+                .replace(/(零.)+/g, '零')
+                .replace(/^整$/, '零元整');
+        };
     </script>
 </body>
 
