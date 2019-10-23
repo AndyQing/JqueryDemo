@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>树组件</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <style>
+        #test1 {
+            width: 160px;
+            border: 1px solid;
+        }
+
+        /* 替换layerui中的样式 */
+        .layui-icon-file {
+            display: none;
+        }
+
+        .layui-tree-line .layui-tree-pack {
+            overflow: hidden;
+            padding-left: 10px;
+            margin-left: 7px;
+            border-left: 1px dashed #597FF3;
+
+        }
+
+        .layui-tree-line .layui-tree-pack .layui-tree-set {
+            float: left;
+            width: 60px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .layui-tree-line .layui-tree-set .layui-tree-set:after {
+            display: none;
+        }
+
+        .layui-tree-line .layui-tree-set .layui-tree-set:nth-child(2n):before {
+            display: none;
+        }
+
+        .layui-tree-line .layui-tree-pack .layui-tree-set:nth-child(2n) {
+            padding-left: 5px;
+        }
+
+        .layui-tree-icon {
+            border: 1px solid #597FF3;
+            margin: 0 2px 0 0;
+        }
+
+        .layui-tree-icon .layui-icon {
+            color: #597FF3;
+        }
+
+        .layui-tree-line .layui-tree-set:before {
+            border-left: 1px dotted #597FF3;
+        }
+
+        /* layui-tree-lineExtend下面的一行两个的 */
+        .layui-tree-lineExtend .layui-tree-txt {
+            color: #5A5A5A;
+            font-size: 12px;
+            width: 65px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .layui-tree-lineExtend .layui-tree-iconClick {
+            display: none;
+        }
+
+        .layui-tree-txt .treeNode {
+            color: #597FF3;
+            font-size: 13px;
+            width: 65px;
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .layui-tree-txt .treeNode+i {
+            background: #4F72DA;
+            width: 6px;
+            height: 8px;
+            display: none;
+        }
+
+        .layui-tree-txt .treeNode+i+span {
+            color: #9B9B9B;
+            font-size: 12px;
+        }
+
+        .showSanjiao i {
+            display: inline-block !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>原来的tree：</p>
+        <img src="./images/tree1.png" />
+        <p>改过样式后的tree：</p>
+        <div id="test1"></div>
+    </div>
+
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="layui/layui.js"></script>
+    <script>
+        // var layer = layui.layer;
+        // layui.use('layer', function () {
+        //     layer.msg('hello');
+        // });
+        var treeNodes = [
+            {
+                title: '<span class="treeNode">江西江西江西</span><i></i><span>（0～20分）</span>', //一级菜单
+                children: [
+                    {
+                        title: '南昌1南昌1南昌1' //二级菜单
+                    },
+                    {
+                        title: '南昌2南昌2南昌2南昌2'
+                    },
+                    {
+                        title: '南昌3南昌3南昌3南昌3'
+                    }
+                ]
+            },
+            {
+                title: '<span class="treeNode">江西江西江西</span><i></i><span>（0～20分）</span>', //一级菜单
+                children: [{
+                    title: '西安11西安11西安11' //二级菜单
+                }]
+            }
+        ];
+        layui.use('tree', function () {
+            var tree = layui.tree;
+            //渲染
+            var inst1 = tree.render({
+                elem: '#test1',  //绑定元素
+                data: treeNodes,
+                click: function (obj) {
+
+                    console.log(obj.data); //得到当前点击的节点数据
+                    console.log(obj.state); //得到当前节点的展开状态：open、close、normal
+                    console.log(obj.elem); //得到当前节点元素
+
+                    console.log(obj.data.children); //当前节点下是否有子节点
+
+                    $(".layui-tree-txt >i").hide();
+                    $(".layui-tree-set").removeClass("showSanjiao");
+                    obj.elem.addClass("showSanjiao")
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
