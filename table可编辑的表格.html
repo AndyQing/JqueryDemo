@@ -19,6 +19,50 @@
 </head>
 
 <body>
+    <button class="exit">退出当前窗口</button>
+    <div contenteditable="true">这是一个可以编辑的div</div>
+    <hr />
+    <button class="addRow">添加一行</button>
+     <button class="deleteRow">删除下面表格的第一行</button>
+    <table style="width: 100%;" id="tab">
+
+        <!-- <tbody> -->
+        <tr data-index="0">
+            <td class="bs-checkbox " style="width: 36px;"><label>
+                    <input name="btSelectItem" type="checkbox" data-index="0">
+                    <span></span>
+                </label>
+            </td>
+            <td>1</td>
+            <td contenteditable="true" style="display: inline-block;">note1</td>
+            <td><p contenteditable="true">item111</p></td>
+            <td>2</td>
+        </tr>
+        <tr data-index="1">
+            <td class="bs-checkbox " style="width: 36px;"><label>
+                    <input name="btSelectItem" type="checkbox" data-index="1">
+                    <span></span>
+                </label>
+            </td>
+            <td>2</td>
+            <td contenteditable="true">Item2</td>
+            <td>Item222</td>
+            <td>2</td>
+        </tr>
+        <tr data-index="2">
+                <td class="bs-checkbox " style="width: 36px;"><label>
+                        <input name="btSelectItem" type="checkbox" data-index="2">
+                        <span></span>
+                    </label>
+                </td>
+                <td>3</td>
+                <td>Item3</td>
+                <td>Item33</td>
+                <td>3</td>
+            </tr>
+        <!-- </tbody> -->
+    </table>
+    <hr />
     <!-- 表格： -->
     <div class="table-box" style="margin: 20px;">
         <div id="toolbar">
@@ -30,7 +74,8 @@
         <table id="table2" data-resizable="true"></table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+    <script src='js/jquery-3.4.1.min.js'></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" ></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <!-- <script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script> -->
@@ -39,7 +84,39 @@
         src="https://unpkg.com/bootstrap-table@1.15.4/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script> -->
 
     <script>
+          $('.addRow').click(function () {
+            // var table = document.getElementById("tab");
+            var tdHtml = '<tr class="new"><td>444</td><td>item444</td><td>123</td>';
+            $('#tab').append(tdHtml);
+        })
+        $('.deleteRow').click(function () {
+            deleteRow();
+        })
+        function deleteRow() {
+            console.log("deleteRow----")
+            var table = document.getElementById("tab");
+            table.deleteRow(1);
+            table.deleteRow(2);
+            getTabData();
+        }
+        function getTabData() {
+            var tb = document.getElementById('tab');    // table 的 id
+            var rows = tb.rows;                           // 获取表格所有行
+            for (var i = 0; i < rows.length; i++) {
+                for (var j = 0; j < rows[i].cells.length; j++) {    // 遍历该行的 td
+                    console.log("第" + (i + 1) + "行，第" + (j + 1) + "个td的值：" + rows[i].cells[j].innerHTML + "。");           // 输出每个td的内容
+                }
+            }
+        }
+
         $(function () {
+            $('.exit').click(function () {
+                window.opener = null;
+                window.open('', '_self');
+                window.close();
+            })
+
+
             let $table = $('#table2');
             let $button = $('#button');
             let $getTableData = $('#getTableData');
@@ -69,15 +146,15 @@
                     }, {
                         field: 'name',
                         title: '名称',
-                        footerFormatter: nameFormatter,
+                        // footerFormatter: nameFormatter,
                     }, {
                         field: 'price',
                         title: '品牌规格及型号'
                     }, {
                         field: 'price1',
                         title: '数量',
-                        formatter: numFormatter,
-                        footerFormatter: numCount,
+                        // formatter: numFormatter,
+                        // footerFormatter: numCount,
                     }, {
                         field: 'price2',
                         title: '单位'
@@ -87,8 +164,8 @@
                     }, {
                         field: 'price4',
                         title: '总价（元）',
-                        formatter: numFormatter,
-                        footerFormatter: moneyFormatter,
+                        // formatter: numFormatter,
+                        // footerFormatter: moneyFormatter,
                     }, {
                         field: 'price5',
                         title: '是否属于小、微型企业的产品'
@@ -108,7 +185,7 @@
                 ],
                 data: [{
                     id: 1,
-                    name: 'Item 1',
+                    name: '<p class="note">note1</p>',
                     price: '$1',
                     price1: '2'
                 }, {
@@ -125,15 +202,20 @@
                  * @param {td 元素} $element
                  */
                 onClickCell: function (field, value, row, $element) {
-                    // console.log(field, value, row);
+                    // debugger
+                    console.log(field, value, row, $element);
+                    console.log('row---', row.id);
+                    // console.log('$element---',$element);
+                    $element.html('').append('<p contenteditable="true" style="width:100%;height:100%;margin:0">hello</p>')
                     if (field !== 'id') {//设置序号列不可以编辑
-                        $element.attr('contenteditable', true);
-                        $element.blur(function () {
-                            let index = $element.parent().data('index');
-                            let tdValue = $element.html();
+                        // $element.attr('contenteditable', true);//在ie下不可编辑
+                        // $element.focus();
+                        // $element.blur(function () {
+                        //     let index = $element.parent().data('index');
+                        //     let tdValue = $element.html();
 
-                            saveData(index, field, tdValue);
-                        })
+                        //     saveData(index, field, tdValue);
+                        // })
                     }
                 }
             });
@@ -162,38 +244,49 @@
         }
         function numFormatter(value) {//将输入的文字转成数字
             var valueTemp = parseFloat(value);
-            if (Object.is(valueTemp, NaN)) {
-                return '';
+            //使用‘Object.is’的方法在ie11中会报错：对象不支持“is”属性或方法！！！
+            // if (Object.is(valueTemp, NaN)) {
+            //     return '';
+            // } else {
+            //     return valueTemp
+            // }
+
+            if (isNaN(valueTemp)) {
+                return 0;
             } else {
                 return valueTemp
             }
+            return valueTemp
+
         }
         function numCount(data) {
             // console.log('data---', data);
             var count = 0;
-            for (var i = 0; i < data.length; i++) {
-                var valueTemp = parseFloat(data[i].price1);
-                if (Object.is(valueTemp, NaN)) {
-                    count += 0;
-                } else {
-                    count += valueTemp;
-                }
-            }
+            // for (var i = 0; i < data.length; i++) {
+            //     var valueTemp = parseFloat(data[i].price1);
+            //     // if (Object.is(valueTemp, NaN)) {
+            //     //     count += 0;
+            //     // } else {
+            //     //     count += valueTemp;
+            //     // }
+            //     count += valueTemp;
+            // }
             console.log('count---', count);
             return count
         }
         function moneyFormatter(data) {
             var count = 0;
-            for (var i = 0; i < data.length; i++) {
-                var valueTemp = parseFloat(data[i].price4);
-                if (Object.is(valueTemp, NaN)) {
-                    count += 0;
-                } else {
-                    count += valueTemp;
-                }
-            }
-            $('#totalMoney').html(count + "," + digitUppercase(count));
-            console.log('total---', count);
+            // for (var i = 0; i < data.length; i++) {
+            //     var valueTemp = parseFloat(data[i].price4);
+            //     // if (Object.is(valueTemp, NaN)) {
+            //     //     count += 0;
+            //     // } else {
+            //     //     count += valueTemp;
+            //     // }
+            //     count += valueTemp;
+            // }
+            // $('#totalMoney').html(count + "," + digitUppercase(count));
+            // console.log('total---', count);
             return count
         }
         // 数字转成大写

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table表格-可以新增删除和修改</title>
+    <link rel="stylesheet" href="./css/table.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/table2.js"></script>
+    <style>
+        #table {
+            width: 100%;
+
+        }
+    </style>
+</head>
+
+<!-- 仿照table.html,实操项目 -->
+
+<body>
+    <button id="addTable">新增一行</button>
+    <button id="delete">删除选中</button>
+    <button id="getTable">得到表中的数据</button>
+
+    <input type="text" onkeyup="format_input_num(this)" value="" size="10" />元
+    <input type="number" value="" size="10" id="money" />元
+
+    <div id="table"></div>
+    <table border="1" style="table-layout: fixed;width: 100%;">
+        <tr>
+            <th width='550'>总价</th>
+            <th>100</th>
+        </tr>
+    </table>
+
+    <script>
+        Table.init({
+            id: 'table',
+            header: ['名称', '报价（元）', '备注'],
+            colModel: [{ width: 500 }, { width: 180, isEdit: true, isNum: true }, { isEdit: true }],
+            checked: true,
+            data: [
+                ['小CP检查不通过数：12', 1, '111'],
+                ['361评分数：86', 1, '222'],
+                ['交付物提交延期数：13', 1, '333']
+            ]
+        });
+
+        $('button#addTable').on('click', function () {
+            Table.addRow('table', true)
+        })
+        $('button#delete').on('click', function () {
+            Table.deleteRow('table')
+        })
+        $('button#getTable').on('click', function () {
+            var trList = $("#table .simple-table tbody").children("tr");
+            var objList = [];
+            for (var i = 0; i < trList.length; i++) {
+                var tdArr = trList.eq(i).find("td");
+                // var list_1 = tdArr.eq(0).find("select").val();
+                var list_1 = tdArr.eq(1).find("div").text();
+                var list_2 = tdArr.eq(2).find("input").val();
+                var list_3 = tdArr.eq(3).find("div").text();
+                // console.log("list_1---", list_1, list_2, list_3);
+                var objTemp = {
+                    '名称': list_1,
+                    '报价（元）': list_2,
+                    '备注': list_3
+                }
+                // console.log("objTemp---", objTemp);
+                objList.push(objTemp);
+            }
+            console.log("objList---", objList);
+        })
+
+        function numCount() {
+            var trList = $("#table .simple-table tbody").children("tr");
+            var num = 0;
+            for (var i = 0; i < trList.length; i++) {
+                var tdArr = trList.eq(i).find("td");
+                var list_2 = tdArr.eq(2).find("input").val();
+                num += list_2 * 1
+            }
+            console.log('num---', num)
+        }
+
+        // $(".numBox").off('blur').on('blur', function () {
+        //     format_input_num(this);
+        // });
+        $(".simple-table").on("blur", ".numBox", function () {
+            console.log('已绑定');
+            format_input_num(this);
+        
+            numCount()
+        });
+        // $("#money").off('blur').on('blur', function () {
+        //     format_input_num(this);
+        // });
+        // 格式化限制数字文本框输入，只能数字或者两位小数
+        function format_input_num(obj) {
+            // 清除"数字"和"."以外的字符
+            obj.value = obj.value.replace(/[^\d.]/g, "");
+            // 验证第一个字符是数字
+            obj.value = obj.value.replace(/^\./g, "");
+            // 只保留第一个, 清除多余的
+            obj.value = obj.value.replace(/\.{2,}/g, ".");
+            obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+            // 只能输入两个小数
+            obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+        }
+    </script>
+</body>
+
+</html>

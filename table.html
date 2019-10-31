@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table表格-可以新增删除和修改</title>
+    <link rel="stylesheet" href="./css/table.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/table.js"></script>
+</head>
+
+<body>
+    <button id="addTable">新增第一张表</button>
+    <button id="delete">删除第一张表</button>
+    <button id="add">新增第二张表</button>
+
+    <div id="table"></div>
+    <div id="newTable"></div>
+    <script>
+        Table.init({
+            id: 'table',
+            header: ['序号', '风险问题描述', '风险问题应对措施'],
+            colModel: [{ width: 69 }, { width: 339 }, { width: 524, isEdit: true }],
+            checked: true,
+            data: [
+                [1, '小CP检查不通过数：12', ''],
+                [2, '361评分数：86', ''],
+                [3, '交付物提交延期数：13', '']
+            ]
+        });
+
+        $('button#addTable').on('click', function () {
+            Table.addRow('table', true)
+        })
+        $('button#delete').on('click', function () {
+            Table.deleteRow('table')
+        })
+        Table.init({
+            id: 'newTable',
+            header: ['序号', '风险问题描述', '风险问题应对措施'],
+            colModel: [{ width: 69 }, { width: 339, isEdit: true }, { width: 54, isEdit: true }],
+            data: [
+                [1, '', ''],
+            ]
+        });
+
+        $('button#add').on('click', function () {
+            Table.addRow('newTable')
+        })
+    </script>
+</body>
+
+</html>
