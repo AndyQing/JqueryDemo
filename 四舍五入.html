@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // num表示需要四舍五入的小数
+    // s表示需要保留几位小数
+    function toFixed(num, s) {
+        var times = Math.pow(10, s);
+        if (num < 0) {
+            num = Math.abs(num);//先把负数转为正数，然后四舍五入之后再转为负数
+            var des = parseInt((num * times + 0.5), 10) / times;
+            return -des.toString();
+        } else {
+            var des = parseInt((num * times + 0.5), 10) / times;
+            return des.toString();
+        }
+    }
+    console.log(toFixed(0.335, 2));//0.34
+    console.log(toFixed(-0.335, 2));//-0.34
+    console.log(toFixed(-1.5, 0));//-2
+    console.log(toFixed(-2999033.45645, 4));//-2999033.4565
+
+
+    Number.prototype.toFixed = function (s) {
+        var times = Math.pow(10, s);
+        var des = this * times + 0.5;
+        des = parseInt(des, 10) / times;
+        return des + '';
+    };
+
+    console.log(1.335.toFixed(2));//1.34
+    console.log((-1.5).toFixed(0));//-1
+</script>
+
+</html>
