@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .out {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid;
+        }
+
+        .red {
+            height: 50px;
+            background: red;
+            display: flex;
+        }
+
+        .green {
+            background: green;
+            flex: 1;
+            /* height: calc(100% - 60px); */
+        }
+
+        .greeninner {
+            height: 100%;
+            background: brown;
+        }
+
+        .blue {
+            height: 50px;
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="out">
+        <div class="red"></div>
+        <div class="green">
+            <div class="greeninner"></div>
+        </div>
+        <div class="blue"></div>
+    </div>
+</body>
+
+</html>
