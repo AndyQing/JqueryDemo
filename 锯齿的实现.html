@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sawtooth {
+            position: relative;
+            background: #eddff7;
+            height: 50px;
+        }
+
+        .sawtooth:after {
+            display: block;
+            content: "";
+            height: 10px;
+            margin-top: 20px;
+            background-color: white;
+            background-size: 10px 20px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-image: linear-gradient(45deg, #eddff7 25%, transparent 25%, transparent), linear-gradient(-45deg, #eddff7 25%, transparent 25%, transparent), linear-gradient(45deg, transparent 75%, #eddff7 75%), linear-gradient(-45deg, transparent 75%, #eddff7 75%);
+        }
+
+        .ticket {
+            width: 200px;
+            height: 90px;
+            position: relative;
+            background: red;
+            margin: 0 auto;
+        }
+
+        .ticket:before,
+        .ticket:after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 100%;
+            background-size: 30px 30px;
+            /* 一个repeat的大小 */
+            background-repeat: repeat-y;
+            background-image: radial-gradient(#fff 8px, transparent 8px);
+            position: absolute;
+            top: 0;
+        }
+
+        .ticket:before {
+            left: -15px;
+            /* 半圆，只显示一个repeat的一半 */
+        }
+
+        .ticket:after {
+            right: -15px;
+        }
+
+        .sawtooth2 {
+            /* 相对定位，方便让before和after伪元素绝对定位偏移 */
+            position: relative;
+            /* 把超出div的部分隐藏起来 */
+            overflow: hidden;
+            background: blue;
+            width: 16.75rem;
+            height: 6rem;
+
+        }
+
+        .sawtooth2:before,
+        .sawtooth2:after {
+            content: " ";
+            width: 100%;
+            height: 0px;
+            position: absolute;
+
+        }
+
+        .sawtooth2:before {
+            /* 圆点型的border ，颜色要和父视图的背景颜色一致*/
+            border-top: 10px dotted white;
+            /* 偏移一个半径，让圆点的一半覆盖div */
+            left: 10px;
+            top: -5px;
+
+        }
+
+        .sawtooth2:after {
+            /* 圆点型的border */
+            border-bottom: 10px dotted white;
+            /* 偏移一个半径，让圆点的一半覆盖div */
+            right: -10px;
+            bottom: -5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sawtooth">下面有三角锯齿</div>
+    <div class="ticket">左右有圆形锯齿</div>
+    <div class="sawtooth2">上下有圆形锯齿</div>
+
+
+</body>
+
+</html>

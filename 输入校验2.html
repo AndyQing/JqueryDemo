@@ -14,6 +14,13 @@
       }
     });
     $().ready(function () {
+      // 手机号码验证  
+      jQuery.validator.addMethod("isMobile", function (value, element) {
+        var length = value.length;
+        var mobile = /^1[0-9]{10}$/;
+        return this.optional(element) || (length == 11 && mobile.test(value));
+      }, "请正确填写您的手机号码");
+
       // 在键盘按下并释放及提交后验证提交表单
       $("#signupForm").validate({
         rules: {
@@ -22,6 +29,12 @@
           username: {
             required: true,
             minlength: 2
+          },
+          telephone: {
+            required: true,
+            maxlength: 11,
+            maxlength: 11,
+            isMobile: true
           },
           password: {
             required: true,
@@ -89,6 +102,12 @@
           username: {
             required: true,
             minlength: 2
+          },
+          telephone: {
+            required: true,
+            maxlength: 11,
+            maxlength: 11,
+            isMobile: true
           },
           password: {
             required: true,
@@ -158,6 +177,10 @@
       <p>
         <label for="username">用户名</label>
         <input id="username" name="username" type="text">
+      </p>
+      <p>
+        <label for="telephone">手机号</label>
+        <input id="telephone" name="telephone" type="text">
       </p>
       <p>
         <label for="password">密码</label>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>我是子页面</div>
+    <h1 id="framedom">this is iframePage</h1>
+
+    <button id="button">发送数据给parent</button>
+
+    <script type="text/javascript">
+        function test() {
+            alert("hello");
+        }
+        var dom = document.getElementById('framedom');
+        var button = document.getElementById('button');
+
+        //父调子，子监听的方法：
+        function receiveMessage(e) {
+            dom.innerHTML = e.data;
+            console.log('receiveMessage', e)
+            test();
+        }
+        window.addEventListener('message', receiveMessage);
+
+        //子传父：
+        button.addEventListener('click', function () {
+            parent.postMessage('我是从子页面中来的数据', '*');
+        })
+    </script>
+</body>
+
+</html>

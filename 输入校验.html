@@ -30,12 +30,17 @@
         <fieldset>
             <legend>输入您的名字，邮箱，URL，备注。</legend>
             <p>
+                <!-- label中的for属性和input中的id属性可以不要 -->
                 <label for="cname">Name (必需, 最小两个字母)</label>
                 <input id="cname" name="name" minlength="2" type="text" required>
             </p>
             <p>
                 <label for="cemail">E-Mail (必需)</label>
                 <input id="cemail" type="email" name="email" required>
+            </p>
+            <p>
+                <label>手机号 (必需)</label>
+                <input name="teel" required>
             </p>
             <p>
                 <label for="curl">URL (可选)</label>

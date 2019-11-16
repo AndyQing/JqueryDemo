@@ -30,6 +30,7 @@ td {
 .simple-table tr td {
     color: #333;
     background-color: #FAFAFA;
+    position: relative;
 }
 
 .simple-table tr td:last-child {
@@ -69,11 +70,11 @@ td {
 .simple-table .textBox,
 .simple-table .numBox {
     width: 100%;
-    /* max-height: 50px; */
+    max-height: 100px;
     border: 0;
     padding: 10px;
     overflow-x: hidden;
-    /* overflow-y: scroll; */
+    overflow-y: auto;
     word-break: break-all;
     scrollbar-width: none;
     box-sizing: border-box;
@@ -82,11 +83,16 @@ td {
 
 .simple-table .numBox {
     border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%
 }
 
-.simple-table .textBox::-webkit-scrollbar {
+/* 设置不显示滚动条 */
+/* .simple-table .textBox::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .simple-table .textBox:focus,
 .simple-table .numBox:focus {

@@ -6,16 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="./js/jquery-3.4.1.min.js"></script>
     <style>
         iframe {
-            width:100%;
+            width: 100%;
             height: 100%;
         }
     </style>
 </head>
 
 <body>
-    <iframe url='https://yjoptest.jiefanghao.com/historyTender'></iframe>
+    <!-- <iframe src='https://yjoptest.jiefanghao.com/historyTender'></iframe> -->
+    <iframe id="ifr" name="ifr" src='./iframeSon.html'></iframe>
+    <button class="doson" id="button">调用子页面方法</button>
+    <h3 id="h3">h3</h3>
+    <script>
+        // $('.doson').click(function () {
+        //     window.frames['ifr'].test();
+        // })
+        // window.frames['ifr'].test();
+        // $('#ifr').window.test();
+
+        var iframe = document.getElementById('ifr');
+        var h3 = document.getElementById('h3');
+        var button = document.getElementById('button');
+
+        button.addEventListener('click', function () {
+             //父调子
+            iframe.contentWindow.postMessage('123', '*')
+        })
+
+        function receiveMessage(e) {
+            h3.innerHTML = e.data;
+            console.log('receiveMessage', e);
+        }
+
+        window.addEventListener("message", receiveMessage, false);
+    </script>
 </body>
 
 </html>

@@ -15,6 +15,7 @@ var Table = function Table() {
     };
 
     Tool.createRow = function (htmls, data, model, checked, index) {
+        console.log("index---", index);
         var rowData = data;
         var trHtml = '<tr>';
         var isTdEdit = false;
@@ -33,18 +34,39 @@ var Table = function Table() {
             }
         }
         htmls.push(checkedHtml);
+        var select = '<select><option value="是">是</option><option value="否">否</option></select>';
         for (var i in rowData) {
             var width = 'width:' + model[i].width + 'px;';
             var color = model[i].color ? 'color:' + model[i].color + ';' : '';
-            var bgColor = model[i].isEdit ? 'background-color: #fff;' : '';
+            var bgColor = model[i].isDisable ? 'background-color: #FAFAFA;' : 'background-color: white;';
             var textBox = '<div class="textBox" contenteditable="true">' + rowData[i] + '</div>';
-            var numBox = '<input class="numBox" type="text" value=' + rowData[i] + ' name="报价（元）">';
+            var disabledBox = '<div class="textBox totalPrice' + index + '">' + rowData[i] + '</div>';
+            var moneyBox = '<input class="numBox moneyBox" type="text" value=' + rowData[i] + '>';
+            // var moneyBox = '<textarea class="numBox moneyBox" type="text" value=' + rowData[i] + '>'+rowData[i]+'</textarea>';
+            var countBox = '<input class="numBox countBox" type="text" value=' + rowData[i] + '>';
+            var isSelectYes = (rowData[i] == '是') ? 'selected' : '';
+            var isSelectNo = (rowData[i] == '否') ? 'selected' : '';
+            var selectBox = '<select class="seletChange"><option value="未选择">未选择</option><option value="是" ' + isSelectYes + '>是</option><option value="否" ' + isSelectNo + '>否</option></select>';
             // var tdHtml = model[i].isEdit || isTdEdit ? '<div class="textBox" contenteditable="true">' + rowData[i] + '</div>' : rowData[i];//根据isEdit判断是否可以编辑
-            var tdHtml = model[i].isNum ? numBox : textBox;//项目中都可以编辑，要判断哪个是数字输入框
+            var tdHtml = model[i].isNum ? moneyBox : (model[i].isSelect ? selectBox : textBox);//项目中都可以编辑，要判断哪个是数字输入框
             // var paddingLeft = model[i].isEdit || isTdEdit ? 'padding-left: 0;' : 'padding-left: 15px;';
             var itemHtml = '<td style="' + width + color + bgColor + '">' + tdHtml + '</td>';
+            // htmls.push(itemHtml);
 
-            htmls.push(itemHtml);
+            //new 11.15
+            var itemHtml2 = '';
+            if (model[i].isMoney) {
+                itemHtml2 = '<td index="' + index + '" style="' + width + bgColor + '">' + moneyBox + '</td>';
+            } else if (model[i].isCount) {
+                itemHtml2 = '<td index="' + index + '" style="' + width + bgColor + '">' + countBox + '</td>';
+            } else if (model[i].isSelect) {
+                itemHtml2 = '<td style="' + width + bgColor + '">' + selectBox + '</td>';
+            } else if (model[i].isDisable) {
+                itemHtml2 = '<td style="' + width + bgColor + '">' + disabledBox + '</td>';
+            } else {
+                itemHtml2 = '<td style="' + width + bgColor + '">' + textBox + '</td>';
+            }
+            htmls.push(itemHtml2);
         }
         htmls.push('</tr>');
     };
@@ -87,10 +109,14 @@ var Table = function Table() {
         //     '</td><td><div class="textBox description" contenteditable="true"></div>' +
         //     '</td><td><div class="textBox" contenteditable="true"></div></td>';
 
+        var select = '<select class="seletChange"><option value="">未选择</option><option value="是">是</option><option value="否">否</option></select>';
         var tdHtml = '<tr class="new"><td style="width:40px"><input type="checkbox" value="new" name="check"></td>' +
-            '<td><div class="textBox" contenteditable="true"></div>' +
-            '</td><td><input class="numBox" type="text" name="报价（元）">' +
-            '</td><td><div class="textBox" contenteditable="true"></div></td>';
+            '<td><div class="textBox" contenteditable="true"></div></td>' +
+            '<td index="' + order + '"><input class="numBox moneyBox" type="text"></td>' +
+            '<td index="' + order + '"><input class="numBox countBox" type="text"></div></td>' +
+            '<td><div class="textBox totalPrice'+order+'" contenteditable="true"></div></td>'+
+            '<td>' + select + '</td>' +
+            '<td><div class="textBox" contenteditable="true"></div></td>';
         $ele.find('tbody').append(tdHtml);
     };
 
