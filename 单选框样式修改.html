@@ -94,6 +94,8 @@
 </body>
 <script>
     $(document).ready(function () {
+        //设置第二个单选被选中
+        $('#paixu2').attr('checked', true);
         // 监听单选框
         $('.choise input[type=radio][name=paixu]').change(function () {
             if (this.value == '1') {
