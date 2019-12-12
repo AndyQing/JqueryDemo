@@ -33,6 +33,36 @@
     </table>
 
     <script>
+        //避免可以编辑的div，被复制进去html元素问题
+        (function () {
+            function addEventListener(eventName, fn) {
+                // 判断当前浏览器是否支持 addEventListener 方法
+                if (document.addEventListener) {
+                    // 浏览器支持此种方式，可以根据方法名找到方法声明，方法声明会转换为true
+                    document.addEventListener(eventName, fn);  // 第三个参数 默认是false
+                } else if (document.attachEvent) {
+                    document.attachEvent('on' + eventName, fn);
+                } else {
+                    // 相当于 element.onclick = fn;
+                    document['on' + eventName] = fn;
+                }
+            }
+
+            addEventListener('copy', function (e) {
+                var explorer = navigator.userAgent;
+                var content = window.getSelection().toString();
+                var E = e || event;
+                E.preventDefault();
+                if (explorer.indexOf("Chrome") >= 0) {
+                    E.clipboardData.setData("text", content.trim());
+                } else {
+                    window.clipboardData.setData("text", content.trim());
+                }
+
+            });
+
+        }());
+
         Table.init({
             id: 'table',
             header: ['名称', '单价（元）', '数量', '总价', '选择是或否', '备注'],
@@ -80,72 +110,67 @@
                 var list_2 = tdArr.eq(2).find("input").val();
                 num += list_2 * 1
             }
-            console.log('num---', num)
+            // console.log('num---', num)
         }
 
         //监听select改变事件
-        // $('.seletChange').change(function () {//此种方法在新增的行中不生效，要用下面的方式：
-        //     console.log('123------');
-        // })
         $(".simple-table").on("change", ".seletChange", function () {
             console.log('22222------');
         });
-        // $(".numBox").off('blur').on('blur', function () {//此种方法不生效，要用下面的方式：
-        //     format_input_num(this);
-        // });
         //对单价输入的监听
         $(".simple-table").on("blur", ".moneyBox", function () {//当输入域失去焦点 (blur) 时
-            var index = this.parentNode.getAttribute('index');
             // var count = this.parentNode.nextElementSibling.firstChild.value;//下一个兄弟节点的子节点
             var count = this.parentNode.parentNode.children[3].firstElementChild.value;
-            // console.log("moneyBox----", this.parentNode.parentNode.children[3]);
-            format_input_num(this, index, count);
+            console.log("moneyBox----count:", count);
+            format_input_num(this, count);
 
             numCount()
         });
 
         //对数量输入的监听
         $(".simple-table").on("blur", ".countBox", function () {//当输入域失去焦点 (blur) 时
-            var index = this.parentNode.getAttribute('index');
             var money = this.parentNode.previousElementSibling.firstElementChild.value;//上一个兄弟节点的子节点
-            // console.log("parent----",  money);
-            format_input_count(this, index, money);
+            console.log("money----", money);
+            format_input_count(this, money);
 
-            // numCount()
+            numCount()
+        });
+        //对备注失去焦点事件
+        $(".simple-table").on("blur", ".textBox", function () {
+            this.innerText = filterHTMLTag(this.innerText);
         });
 
-        // 格式化限制数字文本框输入，只能数字或者两位小数
-        function format_input_num(obj, index, count) {
-            // 清除"数字"和"."以外的字符
-            // obj.value = obj.value.replace(/[^\d.]/g, "");
-            // // 验证第一个字符是数字
-            // obj.value = obj.value.replace(/^\./g, "");
-            // // 只保留第一个, 清除多余的
-            // obj.value = obj.value.replace(/\.{2,}/g, ".");
-            // obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-            // // 只能输入两个小数
-            // obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
-
-            console.log("obj.text=====",obj,obj.innerText);
-            obj.innerText = obj.innerText.replace(/[^\d.]/g, "");
-            // 验证第一个字符是数字
-            obj.innerText = obj.innerText.replace(/^\./g, "");
-            // 只保留第一个, 清除多余的
-            obj.innerText = obj.innerText.replace(/\.{2,}/g, ".");
-            obj.innerText = obj.innerText.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-            // 只能输入两个小数
-            obj.innerText = obj.innerText.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
-
-            // var totalPriceText = ('.totalPrice' + index);
-            // $(totalPriceText).html(obj.value * count);
+        //过滤html元素
+        function filterHTMLTag(msg) {
+            // console.log("msg1111----",msg);
+            var msg = msg.replace(/<\/?[^>]*>/g, ''); //去除HTML Tag
+            msg = msg.replace(/[|]*\n/, ''); //去除行尾空格
+            msg = msg.replace(/&nbsp;/ig, ''); //去掉npsp
+            // console.log("msg2222----",msg);
+            return msg;
         }
-        function format_input_count(obj, index, money) {
+
+        // 格式化限制数字文本框输入，只能数字或者两位小数
+        function format_input_num(obj, count) {
+
+            // 清除"数字"和"."以外的字符
+            obj.value = obj.value.replace(/[^\d.]/g, "");
+            // 验证第一个字符是数字
+            obj.value = obj.value.replace(/^\./g, "");
+            // 只保留第一个, 清除多余的
+            obj.value = obj.value.replace(/\.{2,}/g, ".");
+            obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+            // 只能输入两个小数
+            obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+            obj.parentNode.parentNode.children[4].firstElementChild.innerText = obj.value * count;
+        }
+        function format_input_count(obj, money) {
             var theV = isNaN(parseInt(obj.value)) ? 0 : parseInt(obj.value);
             if (theV != obj.value) {
                 obj.value = theV;
             }
-            var totalPriceText = ('.totalPrice' + index);
-            $(totalPriceText).html(obj.value * money);
+            obj.parentNode.parentNode.children[4].firstElementChild.innerText = obj.value * money;
         }
     </script>
 </body>

@@ -28,25 +28,46 @@
             float: left;
             margin-left: -20px;
         }
+
+        table td {
+            word-break: break-all;
+            /* min-height: 100px; */
+        }
+        .innerText{
+            height: 100%;
+        }
     </style>
 </head>
 
 <body>
-    <table style="width: 100%;" cellpadding="0" cellspacing="0" border="1">
+    <table style="table-layout: fixed;width: 100%;" cellpadding="0" cellspacing="0" border="1">
         <tbody>
             <tr>
-                <th>Month</th>
-                <th>Savings</th>
+                <th width='550'>Month</th>
+                <th width='500'>Savings</th>
                 <th>Savings for holiday!</th>
             </tr>
             <tr>
-                <td>January</td>
-                <td rowspan="2">$100</td>
-                <td>$50</td>
+                <td rowspan="2">January</td>
+                <td class="innerText">
+                    $100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100
+                </td>
+                <td class="innerText">$50</td>
             </tr>
             <tr>
-                <td>February</td>
-                <td>$80</td>
+                <td class="innerText">February</td>
+                <td class="innerText">$80</td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    JanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuary
+                </td>
+                <td class="innerText">$100$100$</td>
+                <td class="innerText">$50</td>
+            </tr>
+            <tr>
+                <td class="innerText">February</td>
+                <td class="innerText">$80</td>
             </tr>
         </tbody>
     </table>

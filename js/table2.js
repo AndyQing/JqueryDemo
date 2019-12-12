@@ -15,7 +15,6 @@ var Table = function Table() {
     };
 
     Tool.createRow = function (htmls, data, model, checked, index) {
-        console.log("index---", index);
         var rowData = data;
         var trHtml = '<tr>';
         var isTdEdit = false;
@@ -40,7 +39,7 @@ var Table = function Table() {
             var color = model[i].color ? 'color:' + model[i].color + ';' : '';
             var bgColor = model[i].isDisable ? 'background-color: #FAFAFA;' : 'background-color: white;';
             var textBox = '<div class="textBox" contenteditable="true">' + rowData[i] + '</div>';
-            var disabledBox = '<div class="textBox totalPrice' + index + '">' + rowData[i] + '</div>';
+            var disabledBox = '<div class="textBox">' + rowData[i] + '</div>';
             var moneyBox = '<input class="numBox moneyBox" type="text" value=' + rowData[i] + '>';
             // var moneyBox = '<textarea class="numBox moneyBox" type="text" value=' + rowData[i] + '>'+rowData[i]+'</textarea>';
             var countBox = '<input class="numBox countBox" type="text" value=' + rowData[i] + '>';
@@ -56,9 +55,9 @@ var Table = function Table() {
             //new 11.15
             var itemHtml2 = '';
             if (model[i].isMoney) {
-                itemHtml2 = '<td index="' + index + '" style="' + width + bgColor + '">' + moneyBox + '</td>';
+                itemHtml2 = '<td style="' + width + bgColor + '">' + moneyBox + '</td>';
             } else if (model[i].isCount) {
-                itemHtml2 = '<td index="' + index + '" style="' + width + bgColor + '">' + countBox + '</td>';
+                itemHtml2 = '<td style="' + width + bgColor + '">' + countBox + '</td>';
             } else if (model[i].isSelect) {
                 itemHtml2 = '<td style="' + width + bgColor + '">' + selectBox + '</td>';
             } else if (model[i].isDisable) {
@@ -112,9 +111,9 @@ var Table = function Table() {
         var select = '<select class="seletChange"><option value="">未选择</option><option value="是">是</option><option value="否">否</option></select>';
         var tdHtml = '<tr class="new"><td style="width:40px"><input type="checkbox" value="new" name="check"></td>' +
             '<td><div class="textBox" contenteditable="true"></div></td>' +
-            '<td index="' + order + '"><input class="numBox moneyBox" type="text"></td>' +
-            '<td index="' + order + '"><input class="numBox countBox" type="text"></div></td>' +
-            '<td><div class="textBox totalPrice'+order+'" contenteditable="true"></div></td>'+
+            '<td><input class="numBox moneyBox" type="text"></td>' +
+            '<td><input class="numBox countBox" type="text"></div></td>' +
+            '<td><div class="textBox" contenteditable="true"></div></td>' +
             '<td>' + select + '</td>' +
             '<td><div class="textBox" contenteditable="true"></div></td>';
         $ele.find('tbody').append(tdHtml);

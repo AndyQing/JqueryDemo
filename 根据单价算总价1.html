@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算总价</title>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+
+    数量:
+    <input id='txtAmount'>
+    单价:
+    <input id='txtPrice'>
+    总价:
+    <input id='txtTotal' readonly>
+
+</body>
+<script>
+
+    //对数量失去焦点的监听
+    $("body").on("blur", "#txtAmount", function () {//当输入域失去焦点 (blur) 时
+        console.log("数量失去焦点======");
+        //去掉失去焦点事件
+        // $("body").off("blur", "#txtAmount");
+        var money = $('#txtPrice').val();
+        format_input_count(this, money);
+    });
+    //对单价输入的监听
+    $("body").on("keyup", "#txtPrice", function () {
+        console.log("keyup----");
+        // 清除"数字"和"."以外的字符
+        this.value = this.value.replace(/[^\d.]/g, "");
+        // 验证第一个字符是数字
+        this.value = this.value.replace(/^\./g, "");
+        // 只保留第一个, 清除多余的
+        this.value = this.value.replace(/\.{2,}/g, ".");
+        this.value = this.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        // 只能输入两个小数
+        this.value = this.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+        if (this.value.indexOf(".") < 0 && this.value != "") {//以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            this.value = parseFloat(this.value);
+        }
+    });
+    //对单价失去焦点的监听
+    $("body").on("blur", "#txtPrice", function () {//当输入域失去焦点 (blur) 时
+        var count = $('#txtAmount').val();
+        this.value = parseFloat(this.value);//此处避免出现‘7.’的数据
+        format_input_num(this, count);
+    });
+
+    // 格式化限制数字文本框输入，只能数字或者两位小数
+    function format_input_num(obj, count) {
+        if (count == '') {
+            $('#txtTotal').val('');
+        } else {
+            $('#txtTotal').val(obj.value * count);
+        }
+
+    }
+    function format_input_count(obj, money) {
+        var theV = isNaN(parseInt(obj.value)) ? 0 : parseInt(obj.value);
+        if (theV != obj.value) {
+            obj.value = theV;
+        }
+        $('#txtTotal').val(obj.value * money);
+
+    }
+</script>
+
+</html>

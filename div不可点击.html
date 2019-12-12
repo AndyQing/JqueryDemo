@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <title>Document</title>
+    <style>
+        .clickDiv2 {
+            cursor: pointer;
+        }
+
+        .disabledDiv {
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- div添加了disabled属性依旧可以点击 -->
+    <div disabled='disabled' class="clickDiv1">我是不可点击的div</div>
+    <div class="clickDiv2">我是不可点击的div2</div>
+    <div class="clickDiv3">我是不可点击的div3</div>
+    <button class="clickBtn">我是不可点击的button</button>
+
+    <script>
+        $('.clickDiv1').click(function () {
+            console.log('clickDiv1-----');
+        })
+        // 设置不可点击方法1：
+        $('.clickDiv2').click(function () {
+            console.log('clickDiv2-----');
+            $(this).css('pointer-events', 'none');
+            //让按钮5s后可点击
+            setTimeout(function () {
+                $('.clickDiv2').css('pointer-events', '');
+            }, 5000);
+        })
+        // 设置不可点击方法2：
+        var flag = true;
+        $('.clickDiv3').click(function () {
+            if (flag) {
+                flag = false;
+                console.log('clickDiv3-----');
+                //让按钮5s后可点击
+                setTimeout(function () {
+                    flag = true;
+                }, 5000);
+            }
+        })
+
+        $('.clickBtn').click(function () {
+            console.log('clickBtn-----');
+            $(this).attr('disabled', true);
+            //让按钮5s后可点击
+            setTimeout(function () {
+                $('.clickBtn').attr('disabled', false)
+            }, 5000);
+
+        })
+
+    </script>
+
+</body>
+
+</html>

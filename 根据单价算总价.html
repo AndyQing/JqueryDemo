@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>计算总价</title>
+    <style>
+        /* ie 浏览器input框会出现小叉叉的问题 */
+        input::-ms-clear {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
+    普通input:<input type="text">
+    <hr />
     数量:
-    <input id=txtAmount  onkeyup="checkInt(this);" onpaste="checkInt(this);" oncut="checkInt(this);"
+    <input id=txtAmount onkeyup="checkInt(this);" onpaste="checkInt(this);" oncut="checkInt(this);"
         ondrop="checkInt(this);" onchange="checkInt(this);">
     单价:
     <input id=txtPrice value=1 onkeyup="checkP(this);" onpaste="checkP(this);" oncut="checkP(this);"
         ondrop="checkP(this);" onchange="checkP(this);" style="border-right-width:0px;margin-right:0px;">
     <input style="border-left-width:0px;margin-left:-4px;width:18px" value="￥" readonly>
     总价:
-    <input id=txtTotal  style="border-right-width:0px;margin-right:0px;" readonly>
+    <input id=txtTotal style="border-right-width:0px;margin-right:0px;" readonly>
     <input style="border-left-width:0px;margin-left:-4px;width:18px" value="￥" readonly>
 </body>
 <script>
