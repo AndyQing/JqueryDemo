@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/daterangepicker.css">
+</head>
+
+<body>
+  <div class="box">
+    此种方法要先选起始时间，再选结束时间：
+    <input type="text" class="minDate" placeholder="请选择起始日期">
+    <input type="text" class="maxDate" placeholder="请选择结束日期">
+  </div>
+  <script src="./js/jquery-3.4.1.min.js"></script>
+  <script src="./js/moment.js"></script>
+  <script src="./js/daterangepicker.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script>
+    ($(function () {
+      /**
+       * date时间往后延迟hour个小时和min分钟 的时间
+       * @param {Object} min 分钟
+       * @param {Object} hour 小时
+       * @param {Object} date 日期
+       */
+      function delay(min, hour, date) {
+        var oldTime = date.getTime();
+        oldTime += min * 60 * 1000;
+        oldTime += hour * 60 * 60 * 1000;
+        return new Date(oldTime);
+      }
+      var startPicker = null;
+      var endPicker = null;
+      //开始日期
+      $('.minDate').val('');
+      $('.minDate').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        autoUpdateInput: false,
+        timePicker24Hour: true,
+        timePicker: false,
+        //minDate:startDate,
+        // maxDate: new Date(),
+        //drops:"up",
+        "locale": {
+          format: 'YYYY-MM-DD HH:mm',
+          applyLabel: "确定",
+          cancelLabel: "取消",
+          resetLabel: "重置",
+          daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+          monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+
+        }
+      }, function (start, end) {
+
+      });
+      //开始日期选择按钮的点击事件监听
+      $('.minDate').on('apply.daterangepicker', function (ev, picker) {
+        console.log("开始日期--apply:", picker.startDate.format('YYYY-MM-DD HH:mm'));
+        $('.minDate').val(picker.startDate.format('YYYY-MM-DD '));
+        //初始化结束日期的空件
+        if (!endPicker) {
+          // console.log("11111111111");
+          $('.maxDate').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            autoUpdateInput: false,
+            timePicker24Hour: true,
+            timePicker: false,
+            minDate: delay(0, 24, new Date($('.minDate').val())),
+            // maxDate: new Date(),
+            //drops:"up",
+            "locale": {
+              format: 'YYYY-MM-DD HH:mm',
+              applyLabel: "确定",
+              cancelLabel: "取消",
+              resetLabel: "重置",
+              daysOfWeek: ["日", "一", "二", "三", "四", "五", "六"],
+              monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+            }
+          }, function (start, end, label) {
+          });
+          // endPicker = $('.maxDate').data('daterangepicker')
+        } else {
+          $('.maxDate').val('');
+          endPicker.setMinDate(delay(0, 24, new Date($('.minDate').val())));//这个setMinDate方法会报错
+          //console.log(delay(0, 24, new Date($('.minDate').val())));
+          //console.log($('.minDate').val())
+          // endPicker.setEndDate(delay(0, 24, new Date($('.minDate').val())));
+        }
+      });
+
+      //结束日期的监听
+      $('.maxDate').on('apply.daterangepicker', function (ev, picker) {
+        console.log("结束日期--apply:", picker.startDate.format('YYYY-MM-DD HH:mm'));
+        $('.maxDate').val(picker.startDate.format('YYYY-MM-DD'));
+      });
+      //结束日期的限制
+      $(".maxDate").click(function () {
+        var start = $('.minDate').val();
+        if (!start || start.length == 0) {
+          alert("请先选择开始时间");
+          return;
+        }
+      });
+    }));
+
+
+  </script>
+</body>
+
+</html>

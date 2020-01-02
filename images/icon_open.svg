@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>icon_open</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M14.4941404,4.74736845 C14.4941404,4.90984636 14.4399811,5.07401674 14.3316625,5.21110747 L8.56200445,12.3838299 C8.42152876,12.5581551 8.20996899,12.6597038 7.98486939,12.6597038 C7.76146228,12.6597038 7.54821003,12.5581551 7.40942682,12.3838299 L1.6702334,5.24157207 C1.4146692,4.92338618 1.46544355,4.45795469 1.78362944,4.20239049 C2.10181533,3.94682629 2.56724682,3.99760063 2.82281103,4.31578652 L7.98656187,10.7404336 L13.1790848,4.28362944 C13.4346491,3.96544355 13.9000805,3.9146692 14.2182664,4.1702334 C14.3993616,4.317479 14.4941404,4.53073125 14.4941404,4.74736845 Z" id="path-1"></path>
+    </defs>
+    <g id="工作台V2.7" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="供应商_预刻画_基础部分_资质证书_已选为投标材料状态" transform="translate(-1248.000000, -243.000000)">
+            <g id="编组-6" transform="translate(1000.000000, 184.000000)">
+                <g id="编组-9" transform="translate(0.000000, 51.000000)">
+                    <g id="编组-7" transform="translate(84.000000, 0.000000)">
+                        <g id="Group" transform="translate(164.000000, 8.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#666666" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

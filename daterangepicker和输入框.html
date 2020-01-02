@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/right.css">
+  <!-- <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/daterangepicker.css">
+</head>
+
+<body>
+  <div class="box">
+    <div class="box_left">111</div>
+    <div class="box-right">
+      <!-- 材料信息 -->
+      <div class="box-right_title">
+        <div class="box-right_title_left">
+          材料信息<img style="margin: -3px 0px 0px 6px;" src="./images/chose.png" alt="">
+        </div>
+        <div class="box-right_title_right">
+          <div class="save_btn"><img class="save_icon" style="margin: -3px 3px 0px 0px;"
+              src="./images/icon_baocun3.svg" />保存</div>
+        </div>
+      </div>
+      <!-- 资质证书 -->
+      <div class="zzzs">
+        <!-- 下拉 -->
+        <div class="box-right_one">
+          <div class="box-right_font">证书名称</div>
+          <div style="margin-right: 10px;">
+            <select class="zs_name" style="width: 192px;">
+              <!-- <option value="1" selected disabled style="display: none;">请选择证书</option> -->
+              <option value="1" selected disabled>请选择证书</option>
+              <option value="2">可乐</option>
+              <option value="3">橙汁</option>
+              <option value="4">雪碧</option>
+              <option value="5">其他</option>
+            </select>
+          </div>
+          <div>
+            <select class="zs_leavl">
+              <option value="" selected disabled style="display: none;">请选择</option>
+              <option value="1">一级</option>
+              <option value="2">二级</option>
+              <option value="4">三级</option>
+              <option value="4">四级</option>
+              <option value="5">五级</option>
+            </select>
+          </div>
+        </div>
+        <div class="box-right_one">
+          <div class="box-right_font">证书名称</div>
+          <div><input type="text" class="input_normal" placeholder="请输入证书"></div>
+        </div>
+        <!-- 长时间 -->
+        <div class="box-right_one">
+          <div class="box-right_font">发证日期</div>
+          <div class="demo">
+            <input class="time1 fzrq" placeholder="请选择日期" readonly type="text" id="time_one" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+        </div>
+        <!-- 短时间 -->
+        <div class="box-right_one">
+          <div class="box-right_font">截止日期</div>
+          <div class="demo">
+            <input class="time2 jzrq" placeholder="请选择日期" readonly type="text" id="time_two" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+          <div class="long_time">
+            <input class="input_long" type="radio" value="" />长期
+          </div>
+        </div>
+        <!-- 文本 -->
+        <div class="box-right_one_write_input">
+          <div class="box-right_font">颁发机构</div>
+          <!-- <div><input type="text" class="bf_jg input_normal" placeholder="请输入内容" autocomplete="off"></div> -->
+          <div class="write_input" placeholder="请输入内容" contenteditable="true" tabindex="0"></div>
+        </div>
+        <!-- textarea -->
+        <div class="box-right_textarea">
+          <div class="box-right_textarea_left">说明</div>
+          <div class="box-right_textarea_right">
+            <textarea name="" id="zzzs_sm" maxlength="300" placeholder="输输入300字以内的补充说明"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- 营业执照 -->
+      <div class="yyzz">
+        <!-- 文本 -->
+        <div class="box-right_one">
+          <div class="box-right_font">名称</div>
+          <div><input type="text" class="input_normal get_designation" placeholder="请输入名称"></div>
+        </div>
+        <div class="box-right_one">
+          <div class="box-right_font">类型</div>
+          <div><input type="text" class="input_normal get_style" placeholder="请输入类型"></div>
+        </div>
+        <div class="box-right_one">
+          <div class="box-right_font">住所</div>
+          <div><input type="text" class="input_normal get_add" placeholder="请输入地址"></div>
+        </div>
+        <div class="box-right_one">
+          <div class="box-right_font">法定代表人</div>
+          <div><input type="text" class="input_normal get_name" placeholder="请输入姓名"></div>
+        </div>
+        <div class="box-right_one">
+          <div class="box-right_font">注册资本</div>
+          <div class="much_money">
+            <input type="text" class="input_normal get_money" placeholder="请输入金额">
+            <span class="wan_yuan">万元</span>
+          </div>
+        </div>
+        <!-- 长时间 -->
+        <div class="box-right_one">
+          <div class="box-right_font">成立日期</div>
+          <div class="demo">
+            <input class="time1" placeholder="请选择日期" readonly type="text" id="time_three" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+        </div>
+        <!-- 短时间 -->
+        <div class="box-right_one">
+          <div class="box-right_font">营业期限</div>
+          <div class="demo">
+            <input class="time2" placeholder="请选择日期" type="text" id="time_four" readonly class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+          <div class="long_time">
+            <input class="input_long2" type="radio" value="" />长期
+          </div>
+        </div>
+        <div class="box-right_one">
+          <div class="box-right_font">经营范围</div>
+          <div><input type="text" class="input_normal get_jyfw" placeholder="请输入范围"></div>
+        </div>
+        <!-- textarea -->
+        <div class="box-right_textarea">
+          <div class="box-right_textarea_left">说明</div>
+          <div class="box-right_textarea_right">
+            <textarea name="" id="get_sm" maxlength="300" placeholder="输入300字以内的补充说明"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- 中小微企业 -->
+      <div class="zxwqw">
+        <!-- 下拉 -->
+        <div class="box-right_one">
+          <div class="box-right_font">营收范围</div>
+          <div>
+            <select class="YS_FW">
+              <option value="1" selected disabled style="display: none;">请选择</option>
+              <option value="2">0-100</option>
+              <option value="3">100-1000</option>
+              <option value="4">1000-10000</option>
+              <option value="5">10000以上</option>
+            </select>
+          </div>
+        </div>
+        <!-- 下拉 -->
+        <div class="box-right_one">
+          <div class="box-right_font">企业人数</div>
+          <div>
+            <select class="QY_people">
+              <option value="1" selected disabled style="display: none;">请选择</option>
+              <option value="2">0-10</option>
+              <option value="3">10-100</option>
+              <option value="4">100-300</option>
+              <option value="5">300以上</option>
+            </select>
+          </div>
+        </div>
+        <!-- textarea -->
+        <div class="box-right_textarea">
+          <div class="box-right_textarea_left">说明</div>
+          <div class="box-right_textarea_right">
+            <textarea name="" id="zxwqw_sm" maxlength="300" placeholder="输输入300字以内的补充说明"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- 专利信息 -->
+      <div class="zlxx">
+        <!-- 文本 -->
+        <div class="box-right_one">
+          <div class="box-right_font">专利号</div>
+          <div><input type="text" class="get_zlh input_normal" placeholder="请输入内容" autocomplete="off"></div>
+        </div>
+
+        <!-- 长时间 -->
+        <div class="box-right_one">
+          <div class="box-right_font">专利名称</div>
+          <div class="demo">
+            <input class="time1" placeholder="请选择日期" readonly type="text" id="time_five" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+        </div>
+        <!-- 长时间 -->
+        <div class="box-right_one">
+          <div class="box-right_font">公布日期</div>
+          <div class="demo">
+            <input class="time1" placeholder="请选择日期" readonly type="text" id="time_six" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+        </div>
+        <!-- textarea -->
+        <div class="box-right_textarea">
+          <div class="box-right_textarea_left">说明</div>
+          <div class="box-right_textarea_right">
+            <textarea name="" id="zlxx_sm" maxlength="300" placeholder="输输入300字以内的补充说明"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/moment.js"></script>
+  <script src="./js/daterangepicker.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script>
+
+    var key = 3;
+
+    $('body').on('change', '.input_long,.input_long2', function () {
+      if (key == 1) {
+        $('#time_four').val('长期')
+      } else {
+        $('#time_two').val('长期')
+      }
+    })
+
+    function getMessage(key) {
+      if (key == 1) { // 营业执照
+        var get_designation = $('.get_designation').val().trim();
+        var get_style = $('.get_style').val().trim();
+        var get_add = $('.get_add').val().trim();
+        var get_money = $('.get_money').val().trim();
+        var get_name = $('.get_name').val().trim();
+        var get_jyfw = $('.get_jyfw').val().trim();
+        var get_sm = $('#get_sm').val().trim();
+        var time_three = $('#time_three').val();
+        var time_four = $('#time_four').val();
+
+        if (get_designation && get_style && get_add && get_name && get_money && get_jyfw && get_sm && time_three && time_four) {
+          $('.save_btn').css({
+            background: '#4967CF',
+            cursor: 'pointer'
+          })
+        } else {
+          $('.save_btn').css({
+            background: '#CCC',
+            cursor: 'not-allowed'
+          })
+        }
+      } else if (key == 2) { // 中小微企业
+        var QY_people = $('.QY_people').val();
+        var YS_FW = $('.YS_FW').val();
+        var zxwqw_sm = $('#zxwqw_sm').val().trim();
+        if (QY_people && YS_FW && zxwqw_sm) {
+          $('.save_btn').css({
+            background: '#4967CF',
+            cursor: 'pointer'
+          })
+        } else {
+          $('.save_btn').css({
+            background: '#CCC',
+            cursor: 'not-allowed'
+          })
+        }
+      } else if (key == 3 || key == 4 || key == 5 || key == 7) { // 资质证书
+        var zs_name = $('.zs_name').val();
+        var bf_jg = $('.write_input').text().trim();
+        var zzzs_sm = $('#zzzs_sm').val().trim();
+        var time_one = $('#time_one').val();
+        var time_two = $('#time_two').val();
+        if (zs_name && bf_jg && zzzs_sm && time_one && time_two) {
+          $('.save_btn').css({
+            background: '#4967CF',
+            cursor: 'pointer'
+          })
+        } else {
+          $('.save_btn').css({
+            background: '#CCC',
+            cursor: 'not-allowed'
+          })
+        }
+      } else if (key == 6) {
+        var get_zlh = $('.get_zlh').val().trim();
+        var zlxx_sm = $('#zlxx_sm').val().trim();
+        var time_five = $('#time_five').val();
+        var time_six = $('#time_six').val();
+        if (get_zlh && zlxx_sm && time_five && time_six) {
+          $('.save_btn').css({
+            background: '#4967CF',
+            cursor: 'pointer'
+          })
+        } else {
+          $('.save_btn').css({
+            background: '#CCC',
+            cursor: 'not-allowed'
+          })
+        }
+      }
+    }
+
+    // 中小微企业
+    $('body').on('change', '.QY_people,.YS_FW', function () {
+      $(this).addClass('select_color');
+      getMessage(2)
+    })
+    $('body').on('keyup', '#zxwqw_sm', function () {
+      getMessage(2)
+    })
+
+    // 专利信息
+    $('body').on('keyup', '.get_zlh,#zlxx_sm', function () {
+      getMessage(6)
+    })
+
+    // 资质证书
+    $('body').on('change', '.zs_name', function () {
+      $(this).addClass('select_color');
+      getMessage(3)
+    })
+    $('body').on('keyup', '.zs_name,.write_input,#zzzs_sm', function () {
+      getMessage(3)
+    })
+    // 营业执照
+    $('body').on('keyup', '.get_designation,.get_style,.get_add,.get_money,.get_name,.get_jyfw,#get_sm', function () {
+      getMessage(1)
+    })
+
+    // $(function () {
+    //   var unSelected = "#999";
+    //   var selected = "#000";
+    //   $("select").css("color", unSelected);
+    //   $("option").css("color", selected);
+    //   $("select").change(function () {
+    //     var selItem = $(this).val();
+    //     if (selItem == $(this).find('option:first').val()) {
+    //       $(this).css("color", unSelected);
+    //     } else {
+    //       $(this).css("color", selected);
+    //     }
+    //   });
+    // });
+
+    $('.demo i').click(function () {
+      $(this).parent().find('input').click();
+    });
+    $('#time_one').val('');
+    $('#time_one,#time_three,#time_five,#time_six').daterangepicker({
+      "singleDatePicker": true,
+      "autoUpdateInput": false,
+      "showDropdowns": true,
+      "autoApply": true,
+      "locale": {
+        "format": "YYYY.MM.DD",
+        "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+        "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        "firstDay": 1,
+      },
+
+    }, function (start, end, label) {
+      if (key == 3 || key == 4 || key == 5 || key == 7) {
+        $('#time_one').val(start.format('YYYY.MM.DD'));
+      } else if (key == 1) {
+        $('#time_three').val(start.format('YYYY.MM.DD'));
+      } else if (key == 6) {
+        $('#time_six').val(start.format('YYYY.MM.DD'));
+      }
+    });
+
+    $('#time_six').daterangepicker({
+      "singleDatePicker": true,
+      "autoUpdateInput": false,
+      "autoApply": true,
+      "locale": {
+        "format": "YYYY.MM.DD",
+        "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+        "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        "firstDay": 1,
+      },
+    }, function (start, end, label) {
+      $('#time_six').val(start.format('YYYY.MM.DD'));
+    });
+
+    $('#time_two,#time_four').daterangepicker({
+      "autoApply": true,
+      "autoUpdateInput": false,
+      "autoApply": true,
+      "locale": {
+        "direction": "ltr",
+        "separator": " - ",
+        "applyLabel": "确定",
+        "cancelLabel": "取消",
+        "fromLabel": "From",
+        "toLabel": "To",
+        "customRangeLabel": "Custom",
+        "format": "YYYY.MM.DD",
+        "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
+        "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        "firstDay": 1,
+      },
+      "opens": "left",
+      "drops": "up"
+    }, function (start, end, label) {
+      if (key == 3 || key == 4 || key == 5 || key == 7) {
+        $('#time_two').val(start.format('YYYY.MM.DD') + ' - ' + end.format('YYYY.MM.DD'));
+        $('.input_long').attr('checked', false);
+      } else if (key == 1) {
+        $('#time_four').val(start.format('YYYY.MM.DD') + ' - ' + end.format('YYYY.MM.DD'));
+        $('.input_long2').attr('checked', false)
+      }
+    });
+
+
+  </script>
+</body>
+
+</html>
