@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    table{
+        margin: 0 auto;
+    }
+    table td {
+        width: 200px;
+        height: 150px;
+        text-align: center;
+        line-height: 150px;
+    }
+    .hover_ {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+    .first {
+        border-top: 1px solid black;
+    }
+    .end {
+        border-bottom: 1px solid black;
+    }
+
+
+</style>
+<body>
+    <table id="tableId" border="0" cellspacing="0" cellpadding="0">
+    </table>
+
+</body>
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script>
+    // 4行4列
+    var trLength = 4; 
+    var tdLength = 4; 
+
+    var tdList = '<tr>'
+    for(var j = 0 ; j < trLength ; j++) {
+        tdList += '<tr>'
+        for(var i = 0 ;i < tdLength ; i++) {
+            tdList += '<td ids="'+ i +'">'+ i +'</td>'
+        }
+        tdList += '</tr>'
+    }
+
+    $('#tableId').html(tdList)
+    var ids = null;
+    $('body').on('click','table td',function(){
+        ids = $(this).attr('ids')
+        getIds(ids)
+    })
+
+    function getIds(ids) {
+        $('table td[ids='+ ids +']').first().addClass('first').siblings().removeClass('first')
+        $('table td[ids='+ ids +']:gt(0),td[ids='+ ids +']:eq(0)').addClass('hover_').siblings().removeClass('hover_')
+        $('table td[ids='+ ids +']').last().addClass('end').siblings().removeClass('end')
+    }
+</script>
+</html>

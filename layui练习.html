@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>layer使用</title>
+    <link rel="stylesheet" href="./layui/css/layui.css" media="all">
+    <style>
+        /* 修改layer.msg背景颜色 */
+        .layui-layer-content {
+            background-color: #D1F2EB;
+            color: #1ABC9C;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 一定要加layui-form的class -->
+    <div class="layui-form">
+        <!-- 带搜索的下拉框 -->
+        <select name="city" lay-verify="" lay-search class="select_city">
+            <option value="010">layer</option>
+            <option value="021">form</option>
+            <option value="0571" selected>layim</option>
+        </select>
+
+        <!-- 普通下拉选择框 -->
+        <div class="layui-form-item">
+            <label class="layui-form-label">下拉选择框</label>
+            <div class="layui-input-block">
+                <select name="interest" lay-filter="aihao">
+                    <option value="0">写作</option>
+                    <option value="1">阅读</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script>
+        var layuiForm;
+        layui.use('form', function () {
+            layuiForm = layui.form;
+        });
+        // var optionHtml = '';
+        // optionHtml += '<option value="000">000</option><option value="111">111</option>';
+        // $('.select_city').append(optionHtml);
+
+    </script>
+</body>
+
+</html>

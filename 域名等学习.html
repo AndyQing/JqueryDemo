@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('window.location.href------', window.location.href);//返回整个url字符串(在浏览器中就是完整的地址栏)
+        console.log("window.location.protocol-----", window.location.protocol);//返回url 的协议部分，例如： http:，ftp:，maito:等等
+        console.log("window.location.host -----", window.location.host);//返回url 的主机部分,根域名
+        console.log("window.location.pathname -----", window.location.pathname);//返回根域名后面的路径名，不包含参数
+        console.log("window.location.port -----", window.location.port); //url 的端口部分，如果采用默认的80端口，那么返回值并不是默认的80而是空字符
+
+
+        console.log('参数type=', getHtmlArg('type', ''));
+
+        //获取url链接中的参数
+        function getHtmlArg(name, defaultValue) {
+            var match = window.location.href.match(new RegExp(name + '=([^&#]*)'));
+            return match ? decodeURIComponent(match[1]) : defaultValue;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="codeButton">5秒重发</button>
+
+</body>
+<script src="./js/jquery-3.4.1.min.js"></script>
+<script>
+    /**
+  * 定时循环
+  * @param i 循环次数
+  */
+    function runCodeTime(i) {
+        var codeButton = $("#codeButton");
+        if (i < 5) {
+            codeButton.html((5 - i) + "秒重发");
+            i += 1;
+            setTimeout("runCodeTime(" + i + ")", 1000);
+            codeButton.attr("disabled", true);
+        } else {
+            codeButton.html("重新获取");
+            codeButton.attr("disabled", false);
+        }
+    }
+
+    $('#codeButton').click(function () {
+        runCodeTime(0);
+    })
+
+</script>
+
+</html>
