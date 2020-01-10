@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 需求：将OldfileList中的obj中的'ha'属性key值改成"he";
+    var OldfileList = [
+        {
+            id: '00000',
+            obj: [
+                { ha: '1111' },
+                { ha: '222' }
+            ]
+        },
+        {
+            id: '111111',
+            obj: [
+                { ha: '333' },
+                { ha: '444' }
+            ]
+        }
+    ];
+
+    //方法1：将OldfileList中的obj添加一个"he"属性，值是'ha'的值；
+    for (var i = 0; i < OldfileList.length; i++) {
+        OldfileList[i].id2 = OldfileList[i].id;
+        for (var j = 0; j < OldfileList[i].obj.length; j++) {
+            OldfileList[i].obj[j].he = OldfileList[i].obj[j].ha;
+        }
+    }
+    console.log("OldfileList------", OldfileList);
+
+
+    //方法2：用map直接赋值每一个属性值，好处：可以取指定属性，不存在不需要的冗余属性。
+    // 坏处：如果属性值太多，需要一个个赋值。
+    var newArr = OldfileList.map(td => ({
+        id: td.id,
+        obj: td.obj.map(item => ({
+            he: item.ha
+        })),
+    }))
+    console.log("newArr-----", newArr);
+
+
+    // 方法3：将OldfileList中的obj添加一个"he"属性，值是'ha'的值；
+    // OldfileList.forEach(function (item, index) {
+    //     // console.log("index---", index, item);
+    //     item.id2 = item.id;
+    //     item.obj.forEach(function (obj, i) {
+    //         obj.he = obj.ha;
+    //     })
+    // })
+    // console.log("OldfileList----", OldfileList)
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

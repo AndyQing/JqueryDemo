@@ -13,6 +13,26 @@
 
 </body>
 <script>
+    let listTemp = [
+        {
+            name: '111',
+            keys: 'qw',
+            content: [{
+                name: '111-2',
+                keys: 'qw-2',
+                content: [{
+                    name: '111-3',
+                    keys: 'qw-3',
+                    content: []
+                }]
+            }]
+        },
+        {
+            name: '222',
+            keys: 'as',
+            content: []
+        }
+    ];
 
     // 得到所有对象中的keys属性
     const keysArr = [];
@@ -40,27 +60,6 @@
         }
     });
 
-
-    let listTemp = [
-        {
-            name: '111',
-            keys: 'qw',
-            content: [{
-                name: '111-2',
-                keys: 'qw-2',
-                content: [{
-                    name: '111-3',
-                    keys: 'qw-3',
-                    content: []
-                }]
-            }]
-        },
-        {
-            name: '222',
-            keys: 'as',
-            content: []
-        }
-    ];
     this.getAllKeys(listTemp);
     console.log("keysArr---", keysArr);
     let tempArr = this.initList(listTemp);
