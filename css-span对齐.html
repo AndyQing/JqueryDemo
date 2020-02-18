@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .firstspan {
+            display: inline-block;
+            width: 100px;
+            overflow: hidden;
+            white-space: nowrap;
+            /* 如果只写上面的，会造成span高度不一致 */
+            /* 需要添加下面的代码解决： */
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <div><span class="firstspan">第一个span巴啦啦</span><span>second span</span></div>
+
+
+</body>
+
+</html>
