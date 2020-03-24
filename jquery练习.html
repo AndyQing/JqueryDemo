@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <p></p>
+    <a>通过attr添加点击属性</a>
+  </div>
+  <script src="./js/jquery-3.4.1.min.js"></script>
+
+  <script>
+    var id = 1;
+    //  dynamicDataHtml += '<a title="删除" class="u1 u4 download_a" onclick="delFile('+ deliveryList[j].fileId+')"></a>';
+    var dynamicDataHtml = '<a title="删除" class="u1 u4 download_a" onclick="delFile(' + id + ')">del</a>';
+    $('.box p').html(dynamicDataHtml);
+
+    function delFile(dataFileId) {
+      // var that = event.currentTarget;
+      // console.log($(event.currentTarget));
+      // console.log(event.target);
+      $(event.currentTarget).parents('.box').remove();
+      console.log("del----", dataFileId);
+      // $.ajax({
+      //   url: window.App.baseUrl + '/docapi/delete',
+      //   type: 'post',
+      //   data: { fileId: dataFileId },
+      //   dataType: 'json',
+      //   success: function (data) {
+      //     console.log("del----", data);
+      //   }
+      // });
+    }
+
+    function clicka(){
+      console.log("a被点击了");
+    }
+    $('.box a').attr('onclick',"clicka()");
+
+    $(document).on("click", ".u6", function () {
+      console.log("del----");
+      var dataFileId = 43948;
+      $.ajax({
+        url: window.App.baseUrl + '/docapi/delete',
+        type: 'post',
+        data: { fileId: dataFileId },
+        dataType: 'json',
+        success: function (data) {
+          // console.log("del----", data);
+          if (data.resultcode == '0000') {
+            $(this).parents('tr').remove();
+          }
+        }
+      });
+    });
+    var today = new Date(),
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    console.log("判断大小", date > '2020-02-20', date);
+  </script>
+</body>
+
+</html>

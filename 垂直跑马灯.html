@@ -1,0 +1,59 @@
+<!DOCTYPE HTML
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>jquery逐条文字向上滚动特效</title>
+    <link href="./css/paomadeng.css" type="text/css" rel="stylesheet" />
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.vticker-min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#news-container').vTicker({
+                speed: 500,
+                pause: 2000,
+                animation: 'fade',
+                mousePause: false,
+                showItems: 3
+            });
+            $('#news-container1').vTicker({
+                speed: 700,
+                pause: 4000,
+                animation: 'fade',
+                mousePause: false,
+                showItems: 1
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="news-container1">
+        <ul>
+            <li>News content1</li>
+            <li>News content2</li>
+            <li>News content3</li>
+            <li>News content4</li>
+            <li>News content5</li>
+        </ul>
+    </div>
+    <div style="overflow: hidden; position: relative; height: 114px;" id="news-container">
+        <ul style="position: absolute; margin: 0pt; padding: 0pt; top: 0px;">
+            <li>
+                <div> 1) Lorem ipsum dolor sit amet, porta at, imperdiet id neque. more info </div>
+            </li>
+            <li>
+                <div> 2) Lorem ipsum dolor sit amet, consectetur adipiscing elit. more info </div>
+            </li>
+            <li>
+                <div> 3) Lorem ipsum dolor sit amet more info more info more info more info </div>
+            </li>
+            <li>
+                <div> 4) jugbit.com jquery vticker more info more info more info more info more info </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

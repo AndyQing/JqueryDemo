@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .notselect {
+            /* 加了这个之后，元素不能被选中 */
+            /* -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none; */
+        }
+
+        #input[readonly] {
+            background-color: #eee;
+        }
+
+        .textBox {
+            width: 100%;
+            min-height: 50px;
+            max-height: 100px;
+            border: 0;
+            padding: 10px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            word-break: break-all;
+            box-sizing: border-box;
+            background: transparent;
+            border: 1px solid red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 提供两个可以输入和复制文本的元素： -->
+    <!-- 方式1:如果不在script中处理，则div中可能被复制其他元素 -->
+    <div class="textBox" contenteditable="true"></div>
+    <!-- 方式2: -->
+    <input type="text" />
+
+    <p class="notselect">qwertyu123</p>
+    <!-- 加了 disabled ，则不能获取到选中的input框中的值 ,所以此时用 readonly ，然后加上不可编辑的样式 -->
+    <input id="input" type="text" value="12345678" disabled />
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+        //避免可以编辑的div，被复制进去html元素问题
+        (function () {
+            function addEventListener(eventName, fn) {
+                // 判断当前浏览器是否支持 addEventListener 方法
+                if (document.addEventListener) {
+                    // 浏览器支持此种方式，可以根据方法名找到方法声明，方法声明会转换为true
+                    document.addEventListener(eventName, fn);  // 第三个参数 默认是false
+                } else if (document.attachEvent) {
+                    document.attachEvent('on' + eventName, fn);
+                } else {
+                    // 相当于 element.onclick = fn;
+                    document['on' + eventName] = fn;
+                }
+            }
+
+            addEventListener('copy', function (e) {
+                var explorer = navigator.userAgent;
+                var content = window.getSelection().toString();
+                /*
+                getSelection()文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/getSelection
+                注意：目前在Firefox, Edge (非 Chromium 版本) 及 Internet Explorer 中，
+                getSelection() 对 <textarea> 及 <input> 元素不起作用。 
+                HTMLInputElement.setSelectionRange() 或 selectionStart 及 selectionEnd 属性可用于解决此问题。
+                */
+
+                // var myArea = document.getElementById("input");
+                // var txt = myArea.selectionStart;
+                // // var txt =  $("#input").selectionStart;//用jquery方式不可行，但是getElementById可行
+                // console.log("txt2--", txt, window.document.activeElement);
+
+                var activeTextarea = document.activeElement;//可使用Document.activeElement 来返回当前的焦点元素.
+                //兼容ie中input元素
+                if (activeTextarea.selectionStart) {
+                    content = activeTextarea.value.substring(
+                        activeTextarea.selectionStart, activeTextarea.selectionEnd
+                    );
+                    // console.log("----", content);
+                }
+                // console.log("content----", content);
+
+                var E = e || event;
+                E.preventDefault();
+                if (explorer.indexOf("Chrome") >= 0) {
+                    E.clipboardData.setData("text", content.trim());
+                } else {
+                    window.clipboardData.setData("text", content.trim());
+                }
+            });
+        }());
+
+
+    </script>
+</body>
+
+</html>
