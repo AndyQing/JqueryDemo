@@ -12,6 +12,55 @@
 
 </body>
 <script>
+    //方法4：
+    // n表示需要四舍五入的小数
+    // d表示需要保留几位小数
+    function toFixed4(n, d) {
+        var s = n + "";
+        if (!d) d = 0;
+        if (s.indexOf(".") == -1) s += ".";
+        s += new Array(d + 1).join("0");
+        if (new RegExp("^(-|\\+)?(\\d+(\\.\\d{0," + (d + 1) + "})?)\\d*$").test(s)) {
+            var s = "0" + RegExp.$2, pm = RegExp.$1, a = RegExp.$3.length, b = true;
+            if (a == d + 2) {
+                a = s.match(/\d/g);
+                if (parseInt(a[a.length - 1]) > 4) {
+                    for (var i = a.length - 2; i >= 0; i--) {
+                        a[i] = parseInt(a[i]) + 1;
+                        if (a[i] == 10) {
+                            a[i] = 0;
+                            b = i != 1;
+                        } else break;
+                    }
+                }
+                s = a.join("").replace(new RegExp("(\\d+)(\\d{" + d + "})\\d$"), "$1.$2");
+
+            }
+            if (b) s = s.substr(1);
+            return (pm + s).replace(/\.$/, "");
+        }
+        return this + "";
+    };
+    console.log(toFixed4(0.335, 2));//0.34
+    console.log(toFixed4(-0.335, 2));//-0.34
+    console.log(toFixed4(-1.5, 0));//-2 正确
+    console.log(toFixed4(-2999033.45645, 4));//-2999033.4565
+    console.log(toFixed4(9.655, 2));//9.66
+    //方法3：
+    function toFixed2(n, d) {
+        if (d <= 0) {
+            return n;
+        } else {
+            let radix = 10 * d;
+            let temp = Math.round(n * radix) / radix;
+            return temp;
+        }
+    }
+    console.log(toFixed2(9.655, 2));//9.65 错误
+    //方法2：
+    var totalPrice = 9.655;
+    console.log(Math.round(totalPrice * 100) / 100);//9.65 错误
+    //方法1：
     // num表示需要四舍五入的小数
     // s表示需要保留几位小数
     function toFixed(num, s) {
@@ -29,6 +78,7 @@
     console.log(toFixed(-0.335, 2));//-0.34
     console.log(toFixed(-1.5, 0));//-2
     console.log(toFixed(-2999033.45645, 4));//-2999033.4565
+    console.log(toFixed(9.655, 2));//9.65 错误，主要因为浏览器中 9.655*100=965.4999999999999
 
 
     Number.prototype.toFixed = function (s) {
@@ -39,7 +89,8 @@
     };
 
     console.log(1.335.toFixed(2));//1.34
-    console.log((-1.5).toFixed(0));//-1
+    console.log((-1.5).toFixed(0));//-1 错误
+    console.log((9.655).toFixed(2));//9.65 错误
 </script>
 
 </html>

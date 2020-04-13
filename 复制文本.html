@@ -44,7 +44,7 @@
 
     <p class="notselect">qwertyu123</p>
     <!-- 加了 disabled ，则不能获取到选中的input框中的值 ,所以此时用 readonly ，然后加上不可编辑的样式 -->
-    <input id="input" type="text" value="12345678" disabled />
+    <input id="input" type="text" value="12345678" readonly />
 
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script>
@@ -78,13 +78,13 @@
                 // // var txt =  $("#input").selectionStart;//用jquery方式不可行，但是getElementById可行
                 // console.log("txt2--", txt, window.document.activeElement);
 
-                var activeTextarea = document.activeElement;//可使用Document.activeElement 来返回当前的焦点元素.
                 //兼容ie中input元素
-                if (activeTextarea.selectionStart) {
+                var activeTextarea = document.activeElement;//可使用Document.activeElement 来返回当前的焦点元素.
+                if (activeTextarea.selectionStart != undefined) {
                     content = activeTextarea.value.substring(
                         activeTextarea.selectionStart, activeTextarea.selectionEnd
                     );
-                    // console.log("----", content);
+                    console.log("----", content);
                 }
                 // console.log("content----", content);
 

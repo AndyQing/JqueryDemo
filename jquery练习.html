@@ -12,6 +12,7 @@
   <div class="box">
     <p></p>
     <a>通过attr添加点击属性</a>
+    <div id="test" style="background-color: red;">123</div>
   </div>
   <script src="./js/jquery-3.4.1.min.js"></script>
 
@@ -38,10 +39,10 @@
       // });
     }
 
-    function clicka(){
+    function clicka() {
       console.log("a被点击了");
     }
-    $('.box a').attr('onclick',"clicka()");
+    $('.box a').attr('onclick', "clicka()");
 
     $(document).on("click", ".u6", function () {
       console.log("del----");
@@ -63,6 +64,10 @@
       date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
     console.log("判断大小", date > '2020-02-20', date);
+
+    // $("#test").css("height", "300px");
+    // $("#test").css("height", "300px !important");//无效，用下面这种方法
+    $("#test").css("cssText", "height:300px !important");
   </script>
 </body>
 
