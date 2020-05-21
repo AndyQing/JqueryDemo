@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table表格-可以新增删除和修改</title>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <style>
+        .table {
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #add9c0;
+        }
+
+        .table th {
+            padding: 10px;
+        }
+
+        .table td input {
+            padding: 10px;
+            box-sizing: border-box;
+            border: 0px;
+        }
+
+        .table td input.canInput {
+            width: 100%;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="table" id="table">
+        <tr>
+            <th>选项</th>
+            <th>序号</th>
+            <th>车船编号</th>
+            <th>油品编号</th>
+            <th>油品名称</th>
+            <th>数量</th>
+            <th>单位</th>
+        </tr>
+        <tr id="a">
+            <td style="text-align: center;"><input type="checkbox" name="test" /></td>
+            <td class="td"><input type="text" value="1" readonly style="cursor: default;"></td>
+            <td><input type="text" class="canInput"></td>
+            <td><input type="text" class="canInput"></td>
+            <td><input type="text" class="canInput"></td>
+            <td><input type="text" class="canInput"></td>
+            <td><input type="text" class="canInput"></td>
+        </tr>
+    </table>
+    <button onclick="add()" class="btn btn-xs btn-default"><i class="icon-plus">增加行</i></button>
+    <button onclick="del()" class="btn btn-xs btn-danger"><i class="icon-minus"></i>删除行</button>
+
+    <button onclick="show()" class="btn btn-xs btn-danger"><i class="icon-minus"></i>显示所有行数据</button>
+
+    <script>
+        function add() {
+            var $td = $("#a").clone();       //克隆第一个对象
+            $(".table").append($td);         //在table后追加一行
+            $(".table tr:last").find("input").val('');   //将尾行元素克隆来的的值清空
+            var i = 1;
+            $(".td").each(function () {       //增加一行后添加序号1,2,3......
+                $(this).find("input").val(i++);
+            })
+        }
+        function del() {
+            $("input[name='test']:checked").each(function () {
+                n = $(this).parents("tr").index();
+                $("#table").find("tr:eq(" + n + ")").remove();
+            });
+        }
+        function show() {
+            var entity = [];
+            $("#table").find("tr").each(function () {
+                var tdArr = $(this).children();
+                var height = tdArr.eq(0).find("input").val();
+                var volume = tdArr.eq(1).find("input").val();
+                var value2 = tdArr.eq(2).find("input").val();
+                if (height == "" || volume == "") {
+                    alert("数据不能为空")
+                }
+                var key = {};
+                key.value0 = height;
+                key.volume = volume;
+                key.value2 = value2;
+                entity.push(key);
+            });
+            var arr = entity.slice(1);//第一行为标题，删除
+            console.log("arr------", arr);
+            return arr;
+        }
+    </script>
+</body>
+
+</html>

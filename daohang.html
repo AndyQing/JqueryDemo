@@ -1,0 +1,82 @@
+<div class="show">
+    <a href="{:url('Car/index')}" {if $controllerName eq 'car'}class="selected"{/if}><span>一级导航1</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Mssc/index')}" {if $controllerName eq 'mssc'}class="selected"{/if}><span>一级导航2</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Cqssc/index')}" {if $controllerName eq 'cqssc'}class="selected"{/if}><span>一级导航3</span> <i class="editbtn" style="display: none;"></i></a>
+    <a href="{:url('Msssc/index')}" {if $controllerName eq 'msssc'}class="selected"{/if}><span>一级导航4</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Xyft/index')}" {if $controllerName eq 'xyft'}class="selected"{/if}><span>一级导航5</span> <i class="editbtn" style="display: none;"></i></a>
+  <a href="{:url('Msssc/index')}" {if $controllerName eq 'msssc'}class="selected"{/if}><span>一级导航6</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Xyft/index')}" {if $controllerName eq 'xyft'}class="selected"{/if}><span>一级导航7</span> <i class="editbtn" style="display: none;"></i></a>
+
+</div>
+<div class="show">
+  
+  <!--一级导航1的二级导航-->
+  <a href="{:url('Car/index')}" {if $controllerName eq 'car'}class="selected"{/if}><span>二级导航1</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Mssc/index')}" {if $controllerName eq 'mssc'}class="selected"{/if}><span>二级导航1</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Cqssc/index')}" {if $controllerName eq 'cqssc'}class="selected"{/if}><span>二级导航1</span> <i class="editbtn" style="display: none;"></i></a>
+    <!--一级导航2的二级导航-->
+  <a href="{:url('Msssc/index')}" {if $controllerName eq 'msssc'}class="selected"{/if}><span>二级导航2</span> <i class="editbtn" style="display: block;"></i></a>
+    <a href="{:url('Xyft/index')}" {if $controllerName eq 'xyft'}class="selected"{/if}><span>二级导航2</span> <i class="editbtn" style="display: none;"></i></a>
+    <a href="{:url('Xglhc/index')}" {if $controllerName eq 'xglhc'}class="selected"{/if}><span>二级导航2</span> <i class="editbtn" style="display: block;"></i></a>
+    <!--一级导航3的二级导航-->
+  <a href="{:url('Txffc/index')}" {if $controllerName eq 'txffc'}class="selected"{/if}><span>二级导航3</span> <i class="editbtn" style="display: none;"></i></a>
+  <a href="{:url('Klsf/index')}" {if $controllerName eq 'klsf'}class="selected"{/if}><span>二级导航3</span> <i class="editbtn" style="display: none;"></i></a>
+ <!--一级导航4的二级导航-->
+  <a href="{:url('Jsks/index')}" {if $controllerName eq 'jsks'}class="selected"{/if}><span>二级导航4</span> <i class="editbtn" style="display: none;"></i></a>
+      <a href="{:url('Xync/index')}" {if $controllerName eq 'xync'}class="selected"{/if}><span>二级导航4</span> <i class="editbtn" style="display: none;"></i></a>
+    <!--一级导航5的二级导航-->
+  <a href="{:url('Gdsyxw/index')}" {if $controllerName eq 'gdsyxw'}class="selected"{/if}><span>二级导航5</span> <i class="editbtn" style="display: none;"></i></a>
+ 
+  </div>
+
+
+
+
+<style>
+    .menumoregame {
+        height: 38px;
+        width: auto;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        left: 1200px;
+        z-index: 9;
+    }
+    .menumoregame div {
+        float: left;
+        cursor: pointer;
+    }
+    .addbtn{
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 130px;
+        height: 38px;
+        background-image: url(../images/btnadd.png);
+        background-repeat: no-repeat;
+        background-position: 115px 13px;
+        cursor: pointer;
+    }
+    .skin_blue{
+        background-color: #e7e7e7;
+    }
+    .gamecontainer {
+        /*display: none;*/
+        position: absolute;
+
+        left: 750px;
+        width: 480px;
+        height: auto;
+        padding: 0 15px 10px 15px;
+    }
+
+</style>
+<script>
+
+    $(".menumoregame").hover(function(){
+        $('.gamecontainer').show();
+    },function(){
+        $('.gamecontainer').hide();
+    });
+</script>

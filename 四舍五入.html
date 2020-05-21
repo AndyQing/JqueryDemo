@@ -46,7 +46,9 @@
     console.log(toFixed4(-1.5, 0));//-2 正确
     console.log(toFixed4(-2999033.45645, 4));//-2999033.4565
     console.log(toFixed4(9.655, 2));//9.66
-    //方法3：
+    console.log(toFixed4(8486.835, 2));//8486.84
+    console.log(toFixed4(565789*0.015, 2));//8486.84
+    //方法3：有问题
     function toFixed2(n, d) {
         if (d <= 0) {
             return n;
@@ -57,10 +59,10 @@
         }
     }
     console.log(toFixed2(9.655, 2));//9.65 错误
-    //方法2：
+    //方法2：有问题
     var totalPrice = 9.655;
     console.log(Math.round(totalPrice * 100) / 100);//9.65 错误
-    //方法1：
+    //方法1：有问题
     // num表示需要四舍五入的小数
     // s表示需要保留几位小数
     function toFixed(num, s) {

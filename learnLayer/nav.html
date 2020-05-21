@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>layer使用</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <style>
+        /* 去掉三角箭头 */
+        .layui-nav-more {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="layui-nav" lay-filter="">
+        <!-- 添加layui-this样式，默认下划线在哪个li标签下显示 -->
+        <li class="layui-nav-item ">
+            <a href="javascript:;">一级导航1</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">二级导航1</a></dd>
+                <dd><a href="">二级导航2</a></dd>
+                <dd><a href="">二级导航2</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item ">
+            <a href="javascript:;">一级导航2</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">二级导航2</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">一级导航3</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">二级导航3</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">一级导航4</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">二级导航4</a></dd>
+            </dl>
+        </li>
+    </ul>
+
+    <!--
+    <script src="../layui/layui.js"></script>
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+
+        });
+    </script> -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(".layui-nav-item").click(function () {
+            console.log("123")
+            $(".layui-nav-item").removeClass('layui-this');
+            $(".layui-nav-child").hide();
+            $(this).addClass('layui-this');
+            $(this).children('.layui-nav-child').show();
+        })
+    </script>
+</body>
+
+</html>

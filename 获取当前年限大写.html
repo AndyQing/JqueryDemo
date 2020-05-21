@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(date('2019/2/2'));//效果   贰零壹玖年零贰月零贰日
+        function date(sum) {
+            var date = new Date(sum);
+            var year = date.getFullYear()
+            var month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+            date = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            date = '' + year + month + date + '';
+            var b = new Array("零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖");
+            year = b[date.substring(0, 1)] + b[date.substring(1, 2)] + b[date.substring(2, 3)] + b[date.substring(3, 4)];
+            month = date.substring(4, 6) < 10 ? b[date.substring(4, 5)] + b[date.substring(5, 6)] : date.substring(4, 6) == 10 ?
+                '零壹拾' : b[date.substring(4, 5)] + '拾' + b[date.substring(5, 6)];
+            date = date.substring(6, 8) < 10 ? b[date.substring(6, 7)] + b[date.substring(7, 8)] : date.substring(6, 8) == 10 ||
+                date.substring(6, 8) == 20 || date.substring(6, 8) == 30 ? '零' + b[date.substring(6, 7)] + '拾' : b[date.substring(6, 7)] + '拾' + b[date.substring(7, 8)];
+            return year + '年' + month + '月' + date + '日';
+        }
+
+        function formatChineseDate(date) {
+            var year = date.getFullYear() + "";
+            var month = date.getMonth() + 1; // 由于月份的范围是0~11，所以这里提出的月份需要+1
+            var day = date.getDate();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+
+            // 在formatChineseDate函数中建立一个函数constant以用来转换阿拉伯数字到大写中文数字，再判断。由于年份中不需要拾佰仟这种单位，则另外判断，这里只能判断 月，日，时，分，秒倘若它是个位数则直接返还结果，倘若他是整数数则返还 数字/10+“拾”。倘若他是其他二位数，则建立两个变量，一个是number的个位数，一个是number的十位数，最终结果返还 十位数 + “拾” + 个位数。
+
+            function constant(number) {
+                var arr = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+                if (number < 10) {
+                    return arr[number];
+                } else if (number % 10 === 0) {
+                    return arr[number / 10] + "拾";
+                } else {
+                    var ge = number % 10;
+                    var shi = parseInt(number / 10);
+                    return arr[shi] + "拾" + arr[ge];
+                }
+            }
+
+            // 现在可以转换年份了，创建字符串yearStr，通过循环和constant函数一位一位得到年份的中文大写数字。然后通过调用constant直接可以转换月到秒
+
+            var yearStr = "";
+            for (i = 0; i < year.length; i++) {
+                yearStr += constant(year[i])
+            }
+
+            var monthStr = constant(month);
+            var dayStr = constant(day);
+            var hoursStr = constant(hours);
+            var minutesStr = constant(minutes);
+            var secondsStr = constant(seconds);
+
+            console.log("现在是:" + yearStr + "年" + monthStr + "月" + dayStr + "日 " + hoursStr + "时" + minutesStr + "分" + secondsStr + "秒");
+        }
+
+        formatChineseDate(new Date())
+    </script>
+</body>
+
+</html>

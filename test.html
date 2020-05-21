@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+            "SymbianOS", "Windows Phone",
+            "iPad", "iPod"];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        console.log("flag---", flag)
+        // var srcTemp = '';//这是iframe中的src地址
+        var srcTemp = 'https://www.baidu.com/';//这是iframe中的src地址
+        if (flag) {
+            // document.write("<iframe height=" + window.screen.height * 0.6 + " width=\"100%\" src=\"{dede:field.shipin/}\" frameborder=0 allowfullscreen></iframe>");
+            if (srcTemp) {
+                document.write("<iframe height=" + window.screen.height * 0.6 + " width='100%' src=" + srcTemp + " frameborder='0'></iframe>");
+            }
+        }
+        else {
+            // document.write("<script type=\"text/javascript\">function setIframeHeight(iframe) {if (iframe) {var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;if (iframeWin.document.body) {iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;}};window.onload = function () {setIframeHeight(document.getElementById('external-frame'));};" + "<\/script><iframe width=\"100%\" src=\"{dede:field.shipin/}\" frameborder=\"0\" scrolling=\"no\" id=\"external-frame\" onload=\"setIframeHeight(this)\"></iframe>");
+            if (srcTemp) {
+                document.write("<iframe height='100%' width='100%' src=" + srcTemp + " frameborder='0' scrolling='no'></iframe>");
+            }
+        }
+    </script>
+</body>
+
+</html>
