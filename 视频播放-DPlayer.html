@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>播放视频</title>
+</head>
+
+<body>
+    <div id="dplayer"></div>
+
+    <script src="./js/DPlayer.min.js"></script>
+    <script>
+        const dp = new DPlayer({
+            container: document.getElementById('dplayer'),
+            video: {
+                // url中传视频url地址：
+                url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4'//这个mp4是可以播放的哦
+                //url: 'https://b.mahua-kb.com/share/jK0FupIndREWXOME',//error
+            },
+        });
+    </script>
+</body>
+
+</html>

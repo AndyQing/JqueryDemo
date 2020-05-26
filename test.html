@@ -46,6 +46,19 @@
                 document.write("<iframe height='100%' width='100%' src=" + srcTemp + " frameborder='0' scrolling='no'></iframe>");
             }
         }
+
+        // 遍历对象
+        var values = {
+            key1: undefined,
+            key2: '123',
+        }
+        for (var key in values) {
+            console.log("key---", key, values[key])
+            if (!values[key]) {
+                delete values[key]
+            }
+        }
+        console.log("values---", values)
     </script>
 </body>
 
