@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改子页面背景色</title>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <style>
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 本地直接预览，地址栏是file:///的页面,所以会报错 ：
+    Uncaught DOMException: Blocked a frame with origin "null" from accessing a cross-origin frame
+    把页面放在服务器上即可不报错，且实现背景色修改-->
+    <iframe id="ifr" name="ifr" src='./iframeSon.html'></iframe>
+
+    <!-- 但是此种方法改变不了其他域名的，把页面放在服务器上也不行： -->
+    <!-- <iframe id="ifr" name="ifr" src='https://www.baidu.com/'></iframe> -->
+    <script>
+        window.onload = function () {
+            var _iframe = document.getElementById('ifr').contentWindow.document.querySelector('body')
+            _iframe.style.background = "blue";  //修改样式
+        }
+    </script>
+</body>
+
+</html>
