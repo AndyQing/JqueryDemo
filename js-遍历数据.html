@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        // 遍历对象
+        var obj = {
+            key1: undefined,
+            key2: '123',
+        }
+        for (var key in obj) {//遍历对象的所有属性，包括原型链上的所有属性
+            if (obj.hasOwnProperty(key)) { //判断是否是对象自身的属性，而不包含继承自原型链上的属性
+                console.log(key);        //键名
+                console.log('键值--',obj[key]);   //键值
+            }
+            if (!obj[key]) {
+                delete obj[key]
+            }
+        }
+        console.log("obj---", obj)
+    </script>
+</body>
+
+</html>
