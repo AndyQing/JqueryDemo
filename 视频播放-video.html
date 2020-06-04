@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>播放视频</title>
+    <!-- <script src="./js/jquery-3.4.1.min.js"></script> -->
+    <style>
+        .video {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .video video {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video">
+        <!-- 显示控制条且自动播放的： -->
+        <!-- 写法1 -->
+        <video controls autoplay src="http://dm.dmholo.com:1668/video/dm-first.mp4" poster="./images/cover.jpg"></video>
+
+        <!-- 写法2 -->
+        <video controls autoplay id="videoPlay1" name="media" poster="./images/cover.jpg">
+            <source src="http://dm.dmholo.com:1668/video/dm-first.mp4" type="video/mp4"></video>
+
+        <!-- 点击封面进行播放的： -->
+        <video id='videoId' src="http://dm.dmholo.com:1668/video/dm-first.mp4" poster="./images/cover.jpg"></video>
+    </div>
+    <script>
+        var video = document.getElementById('videoId');
+        var stopflag = false;
+        video.onclick = function () {
+            if (this.paused) {
+                this.play();
+                console.log("之前是暂停，现在开始播放----")
+            } else {
+                this.pause();
+                console.log("之前是播放状态，现在被暂停")
+            }
+        }
+
+    </script>
+
+</body>
+
+
+</html>

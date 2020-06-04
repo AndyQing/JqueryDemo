@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="./js/jquery-3.4.1.min.js"></script>
+</head>
+
+<style type="text/css">
+    .play-first {
+        animation: myfirst 1.5s;
+    }
+
+    .play-second {
+        animation: mysecond 1.5s;
+    }
+
+    @keyframes myfirst {
+        0% {
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0.75;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes myfirst
+
+    /* Safari and Chrome */
+        {
+        0% {
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0.75;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes mysecond {
+        0% {
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0.75;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes mysecond
+
+    /* Safari and Chrome */
+        {
+        0% {
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0.75;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+<body>
+    <div id="donghua">div123</div>
+</body>
+
+<script>
+
+    function actionIn() {
+        if ($('#donghua').hasClass('play-first')) {
+            $('#donghua').removeClass('play-first').addClass('play-second')
+        } else if ($('#donghua').hasClass('play-second')) {
+            $('#donghua').removeClass('play-second').addClass('play-first')
+        } else {
+            $('#donghua').addClass('play-first')
+        }
+    }
+    actionIn();
+</script>
+
+</html>

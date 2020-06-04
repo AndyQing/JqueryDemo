@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜单</title>
+    <style>
+        .clearfix:before,
+        .clearfix:after {
+            content: " ";
+            display: table;
+        }
+
+        .clearfix:after {
+            clear: both;
+        }
+
+        a,
+        a:hover {
+            text-decoration: none;
+        }
+
+        .menumoregame {
+            color: #1e579f;
+            background: linear-gradient(to bottom, rgba(254, 254, 254, 1) 0%, rgba(230, 230, 230, 1) 100%);
+            height: 38px;
+            width: auto;
+            /* color: #fff; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* right: -80px; */
+            z-index: 9;
+        }
+
+        #moregames {
+            padding: 10px 5px 10px 20px;
+        }
+
+        #moregameicon {
+            padding: 10px 10px 10px 5px;
+        }
+
+        .menumoregame div {
+            float: left;
+            cursor: pointer;
+        }
+
+        .gamecontainer {
+            background-color: #e7e7e7;
+            border: 1px solid #2161b3;
+            position: absolute;
+            top: 37px;
+            left: 0px;
+            width: 480px;
+            height: auto;
+            padding: 0 15px 10px 15px;
+        }
+
+        .gamebox {
+            padding: 25px 35px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            display: none;
+            height: auto;
+            margin-top: 5px;
+            border-top: none;
+        }
+
+        .itemmg {
+            width: 130px;
+            height: 38px;
+            float: left;
+            margin: 1px;
+            position: relative;
+        }
+
+        .itemmg a {
+            width: 130px;
+            background-color: #2161b3;
+            color: #fff;
+            display: inline-block;
+            float: left;
+            height: 38px;
+            margin: 0;
+            text-align: center;
+            font-size: 13px;
+            line-height: 38px;
+        }
+
+        .gamesmltxt {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #333;
+            float: left;
+        }
+
+        .gamebtn1 {
+            background-color: #2161b3;
+            border: 1px solid #2161b3;
+            float: right;
+            margin-right: 5px;
+            padding: 8px;
+            text-align: center;
+            width: 90px;
+            color: #fff;
+            margin-top: 10px;
+            cursor: pointer;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menumoregame">
+        <div id="moregames">更多游戏</div>
+        <div id="moregameicon">▼</div>
+    </div>
+    <div class="gamecontainer" style="display: none;">
+        <div style="height: 20px;"></div>
+        <div class="gamebox clearfix" style="display:block">
+            <div class="itemmg"><a href="javascript:;" gameid="101" rel="4"><span>加拿大时时彩</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="111" rel="12"><span>台湾宾果</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="102" rel="5"><span>快乐时时彩</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="66" rel="14"><span>PC蛋蛋</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="72" rel="0"><span>极速赛车</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="70" rel="21"><span>香港六合彩</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="52" rel="0"><span>秒速飞艇</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="113" rel="20"><span>极速六合彩</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="103" rel="6"><span>澳洲幸运5</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="119" rel="8"><span>天津时时彩</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="120" rel="9"><span>新疆时时彩</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="51" rel="0"><span>澳洲幸运10</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="65" rel="11"><span>北京快乐8</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="110" rel="13"><span>澳洲幸运20</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="112" rel="15"><span>极速28</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="106" rel="16"><span>极速11选5</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="21" rel="17"><span>广东11选5</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="117" rel="18"><span>上海11选5</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="118" rel="19"><span>安徽11选5</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="105" rel="22"><span>极速快3</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="10" rel="23"><span>江苏骰宝(快3)</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="114" rel="24"><span>广西快3</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="115" rel="25"><span>湖北快3</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="116" rel="26"><span>吉林快3</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="60" rel="29"><span>广东快乐十分</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="61" rel="31"><span>重庆幸运农场</span></a>
+            </div>
+            <div class="itemmg"><a href="javascript:;" gameid="107" rel="30"><span>极速幸运农场</span></a>
+            </div>
+        </div>
+
+        <div class="gamesmltxt">
+            注：已选择的彩种可通过鼠标拖动改变排列顺序。
+        </div>
+        <div class="editon">
+            <button class="gamebtn1">编辑</button>
+        </div>
+        <div class="editoff" style="display: none">
+            <button class="gamebtn2">取消</button>
+            <button class="gamebtn1">确定</button>
+        </div>
+    </div>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+
+
+        $(".menumoregame,.gamecontainer").hover(function () {
+            $('.gamecontainer').show();
+        }, function () {
+            $('.gamecontainer').hide();
+        })
+    </script>
+</body>
+
+</html>
