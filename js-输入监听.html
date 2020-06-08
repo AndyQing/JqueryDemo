@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .gray-btn {
+            background: #ccc;
+        }
+
+        .blue-btn {
+            background: #09f;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="tel" name="mobile" id="getNum" value="" placeholder="填写手机号码" autocomplete='off' />
+    <input type="button" name="button" class="gray-btn downloadBtn" value="去下载**APP" disabled />
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+        //监听输入手机号
+        $(document).on('input propertychange', '#getNum', function (e) {
+            console.log("123-", $(this))
+            if (e.type === "input" || e.orignalEvent.propertyName === "value") {
+                if (this.value.length == 11) {
+                    var myreg = /^1\d{10}$/;
+                    if (!myreg.test(this.value)) {
+                        common.tips({ msg: '请输入正确手机号' });
+                        return;
+                    }
+
+                    $('.downloadBtn').removeClass('gray-btn').addClass('blue-btn');
+                    $('.downloadBtn').attr("disabled", false);
+                } else {
+                    $('.downloadBtn').addClass('gray-btn').removeClass('blue-btn');
+                    $('.downloadBtn').attr("disabled", true);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

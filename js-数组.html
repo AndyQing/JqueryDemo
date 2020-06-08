@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    //问题1
+    var arr = [{ id: 1, name: '一', code: 'one' }, { id: 2, name: '二', code: 'two' }];
+    var arr2 = [{ id: 3, name: '三', code: 'three' }, { id: 4, name: '四', code: 'four' }];
+    console.log(arr.concat(arr2))
+
+
+    //问题2
+    var obj1 = { id: 1, name: '一' }
+    var obj2 = { code: 'one', value: 'val1' }
+    var newObj = Object.assign(obj1, obj2);
+    console.log(newObj);
+
+
+    // 问题3
+    function ObjTemp(id, name, code, value) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.value = value;
+    }
+    ObjTemp.prototype = {
+        constructor: ObjTemp,
+        setVal: function (val) {
+            this.value = val
+        },
+        getVal: function () {
+            return this.value;
+        }
+    }
+    var obj = new ObjTemp(1, '一', 'one', 'val1')
+    console.log("obj---", obj)
+    obj.setVal('val2');
+    console.log("val结果为---", obj.getVal())
+
+
+</script>
+
+</html>

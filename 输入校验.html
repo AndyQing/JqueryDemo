@@ -6,7 +6,9 @@
     <title>菜鸟教程(runoob.com)</title>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
     <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <!-- <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script> -->
+    <script src='./js/jquery.validate.min.js'></script>
+    <script src='./js/messages_zh.js'></script>
     <script>
         $.validator.setDefaults({
             submitHandler: function () {
@@ -40,7 +42,7 @@
             </p>
             <p>
                 <label>手机号 (必需)</label>
-                <input name="teel" required>
+                <input name="teel" required data-rule-isMobile="true">
             </p>
             <p>
                 <label for="curl">URL (可选)</label>
@@ -48,13 +50,22 @@
             </p>
             <p>
                 <label for="ccomment">备注 (必需)</label>
-                <textarea id="ccomment" name="comment" required></textarea>
+                <textarea id="ccomment" name="comment" required maxlength="10"></textarea>
             </p>
             <p>
                 <input class="submit" type="submit" value="Submit">
             </p>
         </fieldset>
     </form>
+    <script>
+
+        // 手机号码验证  
+        jQuery.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^1[0-9]{10}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+    </script>
 </body>
 
 </html>

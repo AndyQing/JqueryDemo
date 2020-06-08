@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>显示加载图片</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        #load {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #load img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe id="ifr" name="ifr" src='https://loushu.66maifang.com/shuyuan/quanjing/index.html'></iframe>
+    <div id="load">
+        <img src="./images/cover.jpg" />
+    </div>
+
+
+    <script>
+        var iframe = document.getElementById("ifr");
+        var load = document.getElementById("load");
+        iframe.style.display = "none"; //隐藏 
+        load.style.display = "block"; //显示
+
+        if (iframe.attachEvent) {
+            iframe.attachEvent("onload", function () {
+                //iframe加载完成后你需要进行的操作
+                console.log("加载完成后---")
+                //还是在1s后展示
+                setTimeout(function () {
+                    load.style.display = "none";
+                    iframe.style.display = "block";
+                }, 1000);
+            });
+        } else {
+            iframe.onload = function () {
+                //iframe加载完成后你需要进行的操作
+                console.log("加载完成后22---")
+                //还是在1s后展示
+                setTimeout(function () {
+                    load.style.display = "none";
+                    iframe.style.display = "block";
+                }, 1000);
+
+            };
+        }
+    </script>
+</body>
+
+</html>
