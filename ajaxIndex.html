@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <ul id="ulId">
+  </ul>
+  <script>
+
+    //测试代码
+    var result = [{ "name": "第01集", "url": "https:\/\/www.dt870.com\/20190303\/Ezx1x0ND\/index.m3u8" },
+    { "name": "第02集", "url": "https:\/\/www.dt870.com\/20190303\/TNTDD6FC\/index.m3u8" },
+    { "name": "第03集", "url": "https:\/\/www.dt870.com\/20190303\/qcinPwn3\/index.m3u8" },
+    { "name": "第04集", "url": "https:\/\/www.dt870.com\/20190303\/1Jz8tNZX\/index.m3u8" }];
+    var liHtml = '';
+    for (var i = 0; i < result.length; i++) {
+      liHtml += '<li><a href="' + result[i].url + '" target="_blank">' + result[i].name + '</a></li>'
+    }
+    $('#ulId').html(liHtml)
+
+    $.ajax({
+      url: ' http://xsj.66t.live/tt.php?txurl=https://v.qq.com/x/cover/bzfkv5se8qaqel2.html',
+      type: 'post',
+      dataType: 'json',
+      success: function (result) {
+        console.log("result---", result)
+        var liHtml = '';
+        for (var i = 0; i < result.length; i++) {
+          liHtml += '<li><a href="' + result[i].url + '" target="_blank">' + result[i].name + '</a></li>'
+        }
+        $('#ulId').html(liHtml)
+      }
+    })
+  </script>
+</body>
+
+</html>

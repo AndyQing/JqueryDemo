@@ -1,0 +1,111 @@
+<html>
+
+<head>
+	<script src="./js/jquery-3.4.1.min.js"></script>
+	<style>
+
+
+
+	</style>
+	<script type="text/javascript">
+
+		$(function () {
+
+			$("#moveleft").click(function () {
+
+				var x
+				var c
+				var y
+				x = $('#nk').position().left;
+				y = -($('#nk').width());
+				w = ($('#wk').width());
+				c = Math.abs(x) + 1;
+
+				//alert(Math.abs(y));
+				//alert(Math.abs(w));
+
+				if (Math.abs(y) > Math.abs(w) && $('#nk').position().left > -(-y - w)) {
+					$('#nk').animate({
+						position: 'absolute',
+						left: x - w
+					}, 1000);
+
+
+				}
+				else {
+
+				}
+
+
+
+			});
+
+
+			$("#moveright").click(function () {
+
+				var x
+				var c
+				var y
+				x = $('#nk').position().left;
+				y = $('#nk').width();
+				c = Math.abs(x);
+				w = ($('#wk').width());
+
+				if (Math.abs(y) > Math.abs(w) && $('#nk').position().left < 0) {
+
+					$('#nk').animate({
+						position: 'absolute',
+						left: x + w
+					}, 1000);
+
+				}
+
+
+
+			});
+
+
+
+
+		})
+	</script>
+</head>
+
+<body>
+
+
+
+	<div style="border:1px solid black;width:500px;height:20px;position:relative;float:left;overflow:hidden;margin-right:2px"
+		id="wk">
+
+		<div style="height:20px;position:absolute;display:inline-block;word-break: break-all;white-space: nowrap;"
+			id="nk">
+
+
+			Test text area.........................///////////\\\\\\\\\\\\\\------------************YYJJHJKKJJTest text
+			area.........................///////////\\\\\\\\\\\\\\------------************YYJJHJKKJJ
+
+
+
+		</div>
+
+
+	</div>
+
+	<div style="width:20px;height:20px;border:1px solid black;float:left;margin-right:3px;cursor:pointer;"
+		id="moveright">
+		《</div>
+
+	<div style="width:20px;height:20px;border:1px solid black;float:left;cursor:pointer;" id="moveleft">》</div>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

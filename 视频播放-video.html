@@ -15,6 +15,19 @@
         .video video {
             width: 100%;
         }
+
+        .cover {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .cover img {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -30,11 +43,20 @@
 
         <!-- 点击封面进行播放的： -->
         <video id='videoId' src="http://dm.dmholo.com:1668/video/dm-first.mp4" poster="./images/cover.jpg"></video>
+
+        <div style="position: relative;">
+            <video id='videoId2' src="http://dm.dmholo.com:1668/video/dm-first.mp4" onended="showImg()"></video>
+            <div class="cover" id="cover"><img src="./images/cover.jpg" /></div>
+        </div>
     </div>
     <script>
         var video = document.getElementById('videoId');
+        var video2 = document.getElementById('videoId2');
+        var cover = document.getElementById('cover');
         var stopflag = false;
         video.onclick = function () {
+            // this.play();
+
             if (this.paused) {
                 this.play();
                 console.log("之前是暂停，现在开始播放----")
@@ -42,6 +64,16 @@
                 this.pause();
                 console.log("之前是播放状态，现在被暂停")
             }
+        }
+
+        cover.onclick = function () {
+            this.style.visibility = 'hidden';
+            video2.play();
+        }
+
+        function showImg() {
+            cover.style.visibility = 'visible';
+            console.log('--------')
         }
 
     </script>
