@@ -48,11 +48,36 @@
 
 <body>
     <!-- 在ie选中下会有蓝色背景，如果不能忍受这个背景，可以用layui的下拉框 -->
-    <select>
-        <option>1111</option>
-        <option>22222</option>
-        <option>33333</option>
+    <select id='selectId'>
+        <option emoney='A' value="1">1111</option>
+        <option emoney='B' value="2">22222</option>
+        <option emoney='C' value="3">33333</option>
     </select>
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script>
+        //监听库房选择事件
+        $("#selectId").change(function () {
+            //你要进行的业务逻辑操作代码
+            //    获取value值
+            // var selectedId = $("#selectId option:selected").val();
+            var selectedId = $("#selectId").val();
+            console.log("value值---", selectedId)
+            //获取 option标签下emoney的值
+            var iteValue = $("#selectId").find("option:selected").attr("emoney");
+            console.log("option标签下emoney的值---", iteValue)
+            //获取选中项的文本值
+            var itemText = $("#selectId option:selected").text();
+            console.log("选中项的文本值---", itemText)
+            // // 设置select 选中的value：
+            // $("#selectId").attr("value", "Normal");
+            // $("#selectId").val("Normal");
+
+            // // 清空 Select:
+            // $("#selectId").empty();
+        });
+
+    </script>
 </body>
 
 </html>

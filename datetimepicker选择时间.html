@@ -23,7 +23,17 @@
     jQuery('#datetimepicker').datetimepicker({
         format: "Y-m-d H:i",
         minDate: "-1970/01/01",
+        // value: getFirstDay(),
+        value: '2020-03-06',
         step: 30,
     });
+    function getFirstDay() {
+        var now = new Date(); //当前日期 
+        var nowMonth = now.getMonth(); //当前月 
+        var nowYear = now.getFullYear(); //当前年 
+        //本月的开始时间
+        var monthStartDate = new Date(nowYear, nowMonth, 1);
+        return monthStartDate
+    }
 
 </script>

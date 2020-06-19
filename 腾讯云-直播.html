@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <title>腾讯云视频点播示例</title>
+    <script src="https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.3.2.js" charset="utf-8"></script>;
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tcplayer {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 设置播放器容器 -->
+    <div id="id_test_video" style="width:100%; height:auto;"></div>
+
+    <script>
+        var player = new TcPlayer('id_test_video', {
+            "m3u8": "http://www.benliu.xyz/live/bookStream.m3u8", //请替换成实际可用的播放地址
+            "flv": "http://www.benliu.xyz/live/bookStream.flv", //增加了一个 flv 的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
+            "autoplay": true,      //iOS 下 safari 浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+            // "poster": "http://www.test.com/myimage.jpg",
+            "width": '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+            "height": '320'//视频的显示高度，请尽量使用视频分辨率高度
+        });
+    </script>
+</body>
+
+</html>
