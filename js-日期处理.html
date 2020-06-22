@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./js/moment.js"></script>
+    <script type="text/javascript">
+        console.log("---", moment().format('MMMM Do YYYY, h:mm:ss a'), moment(1592815927).format('YYYY-MM-DD HH:mm:ss'))
+
+        // jquery获取系统当前时间
+        function getNowDate() {
+            // 判断是否在前面加0
+            function getNow(s) {
+                return s < 10 ? '0' + s : s;
+            }
+
+            var myDate = new Date();
+
+            var year = myDate.getFullYear();        //获取当前年
+            var month = myDate.getMonth() + 1;   //获取当前月
+            var date = myDate.getDate();            //获取当前日
+            var h = myDate.getHours();              //获取当前小时数(0-23)
+            var m = myDate.getMinutes();          //获取当前分钟数(0-59)
+            var s = myDate.getSeconds();
+
+            var now = year + '-' + getNow(month) + "-" + getNow(date) + " " + getNow(h) + ':' + getNow(m) + ":" + getNow(s);
+            console.log("now---", now)
+        }
+
+        getNowDate();
+
+    </script>
+</body>
+
+</html>
