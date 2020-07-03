@@ -39,6 +39,10 @@
             if (data2 < date1) return;//设置的时间小于现在时间退出
             _ordertimer = setInterval(function () { countDown(data2, document.getElementById("timer")) }, 1000);
         }
+
+        var endTimeStr = '2020-07-04 14:20:20';
+        countDown(new Date(endTimeStr), document.getElementById("timer"))
+        go(endTimeStr)
     </script>
 </body>
 

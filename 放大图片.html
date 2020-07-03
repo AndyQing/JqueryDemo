@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pinchzoom.js Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <style type="text/css">
+        .content img {
+            width: 100%;
+        }
+
+        .imgzoom_pack {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background: rgba(0, 0, 0, .7);
+        }
+
+        .imgzoom_pack .imgzoom_x {
+            color: #fff;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            background: #000;
+            text-align: center;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        .imgzoom_pack .imgzoom_img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+        }
+
+        .imgzoom_pack .imgzoom_img img {
+            width: 100%;
+            /* height: 100%; */
+            position: absolute;
+            top: 50%;
+        }
+    </style>
+    <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="./js/scale.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // $(".content img").on("click", function () {
+            //     // $(".imgzoom_img>img").attr("src", $(this).attr("zimg"));
+            //     // $(".imgzoom_img>img").attr("src", 'images/b11.jpg');
+            //     // $(".imgzoom_img>img").css("marginTop", "-" + ($(this).height() / 2) + "px");
+            //     $(".imgzoom_pack").show();
+
+            // });
+            // $(".imgzoom_x").on("click", function () {
+            //     $(".imgzoom_pack").hide();
+            //     $(".imgzoom_img>img").attr("src", "");
+            // });
+
+            window.ImagesZoom.init({
+                // "elem": ".content"
+                "elem": ".showbig"
+            })
+        })
+
+    </script>
+</head>
+
+<!-- 建议用，这里只引用了一个js，然后写上放大图片的容器imgzoom_pack，之后就可以用了 -->
+
+<body>
+    <div class="content">
+        　　<img class="showbig" src="images/cover.jpg" zimg='images/b11.jpg' />
+    </div>
+    <div class="imgzoom_pack" style="display: none;">
+        <div class="imgzoom_x">X</div>
+        <div class="imgzoom_img"><img class="pp" src=""></div>
+    </div>
+</body>
+
+</html>
