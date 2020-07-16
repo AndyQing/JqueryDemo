@@ -18,13 +18,18 @@
     <h1 id="framedom">this is iframePage</h1>
 
     <button id="button">发送数据给parent</button>
+    <button id="showDialog">展示一个对话框</button>
 
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="./layer-v3.1.1/layer.js"></script>
     <script type="text/javascript">
         function test() {
+            console.log("test------")
             alert("hello");
         }
         var dom = document.getElementById('framedom');
         var button = document.getElementById('button');
+        var showDialog = document.getElementById('showDialog');
 
         //父调子，子监听的方法：
         function receiveMessage(e) {
@@ -34,10 +39,46 @@
         }
         window.addEventListener('message', receiveMessage);
 
-        //子传父：
         button.addEventListener('click', function () {
-            parent.postMessage('我是从子页面中来的数据', '*');
+            //子传父：
+            // parent.postMessage('我是从子页面中来的数据', '*');
+
+            //子传父-方法2：
+            parent.receiveMessage({ data: '123' });//在本地环境不可用，需要部署到线上即可
         })
+
+        $('#showDialog').click(function () {
+            // layer.open({
+            //     title: '在线调试', content: '可以填写任意的layer代码'
+            // });
+            //上面这种方法只能在子窗口展示，如果想在父窗口展示，请用下面传参的方式，把弹框写在父窗口：
+            var content = `<p style="margin:16px">这里是内容，可以是html标签哈
+            <input value='123' id="input"/>
+                <button id="showMsg" onclick="ifr.window.showMsg()">点击弹出msg</button></p>`;
+            // 上面onclick="showMsg()"代表调用父窗口的方法； 
+            // 上面onclick="ifr.window.showMsg()"代表调用子窗口的方法
+            parent.layerOpen({
+                title: '标题',
+                content: content,
+                btn: ['确定', '取消'],
+                yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+                    console.log("按钮1-----", $('#input', window.parent.document).val())
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                },
+                btn2: function (index, layero) {
+                    //按钮【按钮二】的回调
+                    console.log("按钮2-----")
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+            })
+        })
+
+        function showMsg() {
+            //子窗口调用 layer.msg，会在子窗口里面显示，所以，如果想调用 layer.msg，还得放到父窗口
+            // layer.msg("son-hello", { time: '50000', offset: '100px' });
+            parent.showMsg('son-hello');
+        }
     </script>
 </body>
 

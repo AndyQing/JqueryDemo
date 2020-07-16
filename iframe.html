@@ -20,6 +20,9 @@
     <iframe id="ifr" name="ifr" src='./iframeSon.html'></iframe>
     <button class="doson" id="button">调用子页面方法</button>
     <h3 id="h3">h3</h3>
+
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="./layer-v3.1.1/layer.js"></script>
     <script>
         // $('.doson').click(function () {
         //     window.frames['ifr'].test();
@@ -32,8 +35,11 @@
         var button = document.getElementById('button');
 
         button.addEventListener('click', function () {
-             //父调子
-            iframe.contentWindow.postMessage('123', '*')
+            //父调子
+            // iframe.contentWindow.postMessage('123', '*');
+
+            //父调子-方法2：
+            ifr.window.test();//在本地环境不可用，需要部署到线上即可
         })
 
         function receiveMessage(e) {
@@ -42,6 +48,20 @@
         }
 
         window.addEventListener("message", receiveMessage, false);
+
+        function layerOpen(obj) {
+            layer.open({
+                type: 1,//默认是0，传type=1是为了在弹框的同时，还能弹出msg提示，此时内容中的外边距没有了，需要自己加样式
+                title: obj.title,
+                content: obj.content,
+                btn: obj.btn,
+                yes: obj.yes,
+                btn2: obj.btn2,
+            });
+        }
+        function showMsg(msg) {
+            layer.msg(msg, { time: '50000' })
+        }
     </script>
 </body>
 
