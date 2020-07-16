@@ -65,6 +65,16 @@
             var mobile = /^1[0-9]{10}$/;
             return this.optional(element) || (length == 11 && mobile.test(value));
         }, "请正确填写您的手机号码");
+
+        var phone = 155513071275;
+        // var mobileReg = new RegExp(/^1[3456789]\d{9}$/);
+        // var mobileReg = new RegExp(/^1[3-9]\d{9}$/);
+        var mobileReg = new RegExp(/^1[0-9]{10}$/);//这个代表1后面10位数字（0-9）
+        if (!(mobileReg.test(phone))) {
+            alert("手机号码有误，请重填");
+        } else {
+            alert("手机号码正确");
+        }
     </script>
 </body>
 

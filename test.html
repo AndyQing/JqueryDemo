@@ -59,6 +59,17 @@
             }
         }
         console.log("values---", values)
+
+        // 对象数组计算
+        var arr = [{ totalPrice: 12 }, { totalPrice: 23 }, { name: 'qing' }];
+        var total = 0;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].hasOwnProperty('totalPrice')) {
+                total += arr[i].totalPrice
+            }
+        }
+        console.log("total---", total)
+
     </script>
 </body>
 
