@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+	<title>菜鸟教程(runoob.com)</title>
+	<style>
+		.table2 {
+			width: 100%;
+			margin: 0 auto;
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+			text-align: center;
+		}
+
+		.table2 th {
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.table2 td {
+			border: 1px solid #ccc;
+			padding: 10px 20px;
+		}
+
+		.table2 td {
+			font-size: 14px;
+		}
+
+		.title {
+			font-size: 28px;
+			text-align: center;
+			padding: 40px 0;
+		}
+	</style>
+</head>
+
+<body>
+	<p>预期效果图:</p>
+	<img src="./images/tablepic.png" />
+
+	<!-- 代码写死是这样，但是不知道怎么返回，才能用js拼接 -->
+	<div class="row">
+		<table id="tbcm1" class="table2" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th style="text-align: center;">过程域</th>
+					<th style="text-align: center;">阶段</th>
+					<th style="text-align: center;">活动</th>
+					<th style="text-align: center;">交付物</th>
+					<th style="text-align: center;">是否裁剪</th>
+				</tr>
+			</thead>
+			<tbody id="pmprocessList">
+				<!-- rowspan="n",里面的数字是n，那么下面就有n-1个tr -->
+				<tr>
+					<td rowspan="8">软件工程</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">项目生命周期</td>
+					<td style="text-align: center;">规定项目生命周期</td>
+					<td style="text-align: center;">交付物</td>
+					<td style="text-align: center;">是否裁剪</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" rowspan="2">需求</td>
+					<td style="text-align: center;">需求差异化分析</td>
+					<td style="text-align: center;">交付物</td>
+					<td style="text-align: center;">是否裁剪</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">需求调研</td>
+					<td style="text-align: center;">交付物</td>
+					<td style="text-align: center;">是否裁剪</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" rowspan="4">系统设计</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" rowspan="2">系统设计</td>
+					<td style="text-align: center;">交付物</td>
+					<td style="text-align: center;">是否裁剪</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">交付物</td>
+					<td style="text-align: center;">是否裁剪</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">设计评审</td>
+					<td style="text-align: center;">交付物</td>
+					<td style="text-align: center;">是否裁剪</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<script src="./js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+
+		$.ajax({
+			url: 'data.json',
+			async: false,
+			contentType: "application/json;charset=utf-8",
+			dataType: 'json',
+			success: function (data) {
+				var processList = data.data;
+				console.log(processList)
+				var str = "";
+				for (var i = 0; i < processList.length; i++) {
+					str += `<tr>
+									<td rowspan='6'>${processList[i]['过程域']}</td>
+									<td>阶段</td>
+									<td>活动</td>
+									<td>交付物</td>
+									<td>是否裁剪</td>
+									<td>模板</td>
+									<td>是否裁剪</td>
+									<td>模板</td>
+								</tr>`
+				}
+			}
+		});
+
+
+	</script>
+</body>
+<!--  /Body -->
+
+</html>

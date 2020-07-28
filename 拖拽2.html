@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <style type="text/css">
+        #div1 {
+            width: 350px;
+            height: 70px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #drag2 {
+            width: 200px;
+            height: 70px;
+            line-height: 70px;
+            background-color: blanchedalmond;
+            margin-left: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <br />
+    <p id="drag1" draggable="true" ondragstart="drag(event)">这是一段可移动的段落。请把该段落拖入上面的矩形。</p>
+    <p id="drag2" draggable="false">可移动的段落</p>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+
+        function drop(ev) {
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+            ev.preventDefault();
+        }
+
+        $('body').on('mousedown', '#drag2', function (e) {
+            e = e || window.event;
+            console.log("e.pageX--", e.pageX, e.pageY);
+            console.log("e.clientX--", e.clientX, e.clientY);
+            // thisobj.dragImage = $(this).find('img')[0];
+            // var downScrollTop = $(window).scrollTop() || 0;
+            // var x = e.clientX - thisobj.scaleWidth / 2;
+            // var y = e.clientY - thisobj.scaleWidth / 2 + downScrollTop;
+            // $('#clodeDragableImage').css({ left: x + 'px', top: y + 'px' });
+        })
+    </script>
+</body>
+
+</html>

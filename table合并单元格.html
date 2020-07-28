@@ -33,7 +33,8 @@
             word-break: break-all;
             /* min-height: 100px; */
         }
-        .innerText{
+
+        .innerText {
             height: 100%;
         }
     </style>
@@ -43,31 +44,35 @@
     <table style="table-layout: fixed;width: 100%;" cellpadding="0" cellspacing="0" border="1">
         <tbody>
             <tr>
-                <th width='550'>Month</th>
-                <th width='500'>Savings</th>
-                <th>Savings for holiday!</th>
+                <th width='250'>行-列</th>
+                <th width='200'>Savings</th>
+                <th width='200'>Savings for holiday!</th>
             </tr>
             <tr>
-                <td rowspan="2">January</td>
-                <td class="innerText">
-                    $100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100$100
+                <td rowspan="3">1-1</td>
+                <td class="innerText" rowspan="2">
+                    1-1-1
                 </td>
-                <td class="innerText">$50</td>
+                <td class="innerText">A</td>
             </tr>
             <tr>
-                <td class="innerText">February</td>
-                <td class="innerText">$80</td>
+                <!-- <td class="innerText">February</td> -->
+                <td class="innerText">B</td>
+            </tr>
+            <tr>
+                <td class="innerText">1-1-2</td>
+                <td class="innerText">C</td>
             </tr>
             <tr>
                 <td rowspan="2">
-                    JanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuaryJanuary
+                    2-1
                 </td>
-                <td class="innerText">$100$100$</td>
-                <td class="innerText">$50</td>
+                <td class="innerText">2-1-1</td>
+                <td class="innerText">D</td>
             </tr>
             <tr>
-                <td class="innerText">February</td>
-                <td class="innerText">$80</td>
+                <td class="innerText">2-1-2</td>
+                <td class="innerText">E</td>
             </tr>
         </tbody>
     </table>

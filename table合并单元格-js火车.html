@@ -1,0 +1,164 @@
+<!DOCcargoName html />
+<html>
+
+<head>
+	<title>test table</title>
+</head>
+
+<body>
+	<table id="testTable" border="1" cellspacing="1" cellpadding="1"></table>
+</body>
+
+</html>
+<script cargoName="text/javascript">
+
+	/*
+	 *思路：
+	 * 1、根据需要合并的字段的先后顺序对数据进行排序（这里需要注意点：a、只针对需要合并的字段；b、合并字段有向后顺序（这个顺序类似sql中的"order by truckPlate,cargoName"））
+	 * 2、对排序好的数据进行合并：按需要合并的字段顺序先后对行数据对应字段进行处理
+	 * 3、此处都采用的递归的方式实现上面两个步骤。
+	 * 4、对行进行颜色处理。（可省略）
+	 */
+
+
+	let list = [
+		{ 'truckPlate': '武昌站', cargoName: '快速', trainCode: 'K82', enterTime: '6:02', leaveTime: '6:08', duration: 6 },
+		{ 'truckPlate': '武汉站', cargoName: '动车', trainCode: 'D289', enterTime: '8:24', leaveTime: '8:32', duration: 7 },
+		{ 'truckPlate': '汉口站', cargoName: '动车', trainCode: 'D158', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '武汉站', cargoName: '高铁', trainCode: 'G129', enterTime: '8:24', leaveTime: '8:32', duration: 6 },
+		{ 'truckPlate': '武汉站', cargoName: '高铁', trainCode: 'G68', enterTime: '8:24', leaveTime: '8:32', duration: 9 },
+		{ 'truckPlate': '武昌站', cargoName: '动车', trainCode: 'D5242', enterTime: '9:02', leaveTime: '9:10', duration: 8 },
+		{ 'truckPlate': '武昌站', cargoName: '直达', trainCode: 'Z168', enterTime: '10:52', leaveTime: '10:57', duration: 5 },
+		{ 'truckPlate': '汉口站', cargoName: '动车', trainCode: 'D86', enterTime: '8:00', leaveTime: '8:05', duration: 5 },
+		{ 'truckPlate': '汉口站', cargoName: '直达', trainCode: 'Z35', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '武昌站', cargoName: '特快', trainCode: 'T254', enterTime: '6:55', leaveTime: '7:02', duration: 7 },
+		{ 'truckPlate': '汉口站', cargoName: '快速', trainCode: 'K91', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '武汉站', cargoName: '动车', trainCode: 'D5146', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '武汉站', cargoName: '高铁', trainCode: 'G362', enterTime: '8:24', leaveTime: '8:32', duration: 7 },
+		{ 'truckPlate': '汉口站', cargoName: '直达', trainCode: 'Z38', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '汉口站', cargoName: '特快', trainCode: 'T232', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '武汉站', cargoName: '高铁', trainCode: 'G69', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+		{ 'truckPlate': '武昌站', cargoName: '直达', trainCode: 'Z25', enterTime: '21:56', leaveTime: '22:08', duration: 12 },
+		{ 'truckPlate': '武汉站', cargoName: '动车', trainCode: 'D91', enterTime: '8:24', leaveTime: '8:32', duration: 8 },
+	];
+
+
+	/**
+	 * 排序操作开始
+	 */
+	let dt = list;
+	let sortColumn = ['truckPlate', 'cargoName', 'duration', 'enterTime']; //需要排序合并的列，排序顺序即数组字段先后顺序。
+
+	/*
+	 *递归比较函数（用于比较多字段顺序）
+	 *参数：
+	 *	a、b 是list.sort()方法默认会传递进来的比较字段。
+	 *	c: 需要排序的字段，默认从第一个sortColumn元素开始进行排序
+	 *	i: 递归临界判断字段，默认为0
+	 */
+	let compare = function (a, b, c = sortColumn[0], i = 0) {
+		if (a[c] == b[c]) { //等于的话进行判断是否还有后续字段需要排序，没有则返回0；有则递归进行后续字段排序处理。
+			if (i == (sortColumn.length - 1)) {//没有后续字段
+				i = 0;
+				return 0;
+			}
+			i += 1;
+			return compare(a, b, sortColumn[i], i);//递归排序后续字段
+		} else if (a[c] > b[c]) { //大于返回1
+			return 1;
+		} else { //小于返回-1
+			return -1;
+		}
+	};
+	dt.sort(compare); //对数据进行排序
+
+
+
+	/**
+	 * 排序操作结束
+	 */
+
+	/**
+	 * 合并操作开始
+	 */
+	let mergeColumns = []; //存放合并行内容的数组
+	for (let i = 0; i < sortColumn.length; i++) {
+		mergeColumns.push({
+			rspan: 1, //合并的行数
+			colStr: '', //合并行的内容
+			colName: sortColumn[i] //行key
+		});
+	}
+	
+	/*
+     * 列合并函数（递归实现,这里只处理了需要合并排序的列）
+	 * 参数：
+	 *	curItem: 当前条数据
+	 *	preItem：前一条数据
+	 *	curIndex: 用于定义当前执行到第几个合并字段
+     */
+	let dataMerge = function (curItem, preItem, curIndex = 0) {
+		if (curItem[mergeColumns[curIndex].colName] == preItem[mergeColumns[curIndex].colName]) {//值相同说明该字段这两行数据内容相同，可以合并，所以rspan加1
+			mergeColumns[curIndex].colStr = '';
+			mergeColumns[curIndex].rspan += 1;
+			if (curIndex == (mergeColumns.length - 1)) {//做一个限制，否则会无线递归下去
+				return;
+			}
+			curIndex += 1;
+			dataMerge(curItem, preItem, curIndex);//递归调用
+		} else { //值不同，则需要进行列td输出。
+			for (let j = curIndex; j < sortColumn.length; j++) {//从curIndex进行内容处理，防止遗漏或过多处理
+				mergeColumns[j].colStr = ('<td  rowspan="' + mergeColumns[j].rspan + '">' + curItem[mergeColumns[j].colName] + '</td>');
+				mergeColumns[j].rspan = 1;
+			}
+			curIndex = 0;
+		}
+	}
+
+	/*
+     * 倒序循环，一次取当前条和下一条，进行比较，
+     * 根据比较结果累加合并的行数或重置合并的行数，生成的标签依次往前累加
+     * 为什么要倒叙处理呢？因为td的rowspan属性是在第一条编写的哦
+     */
+	let ht = ''; //输出的行内容（数据都是倒叙拼接）
+	for (let i = dt.length - 1; i > 0; i--) {
+		let curItem = dt[i], preItem = dt[i - 1]; //获取当前条和前一条
+		dataMerge(curItem, preItem, 0);//合并数据
+		
+		ht = '<tr>' + mergeColumns[0].colStr + mergeColumns[1].colStr + '<td>' + curItem.trainCode + '</td>' + mergeColumns[3].colStr + '<td>' + curItem.leaveTime + '</td>' + mergeColumns[2].colStr + '</tr>' + ht;
+	}
+	console.log("mergeColumns---", mergeColumns)
+	let firstItem = dt[0];// 由于循环没有到第一条，所以必须单独补上第一条
+	ht = '<tr><td name="col_1" rowspan="' + mergeColumns[0].rspan + '">' + firstItem.truckPlate + '</td><td name="col_2" rowspan="' + mergeColumns[1].rspan + '">' + firstItem.cargoName + '</td>'
+		+ '<td>' + firstItem.trainCode + '</td><td rowspan="' + mergeColumns[3].rspan + '">' + firstItem.enterTime + '</td><td>' + firstItem.leaveTime + '</td><td rowspan="' + mergeColumns[2].rspan + '">' + firstItem.duration + '</td></tr>' + ht;
+
+	//表头处理
+	ht = '<thead><tr><th>车站名称</th><th>列车类型</th><th>列车名称</th><th>到站时间</th><th>出站时间</th><th>停靠时长</th></tr></thead><tbody>' + ht + '</tbody>';
+
+	var tbl = document.getElementById('testTable');
+	tbl.innerHTML = ht;
+
+	/**
+	 * 合并操作结束
+	 */
+
+
+</script>
+
+<script>
+
+	//颜色处理
+	var tbl = document.getElementById('testTable'), firstColor = '#def', secondColor = '#fed';
+	for (var i = 1; i < tbl.rows.length; i++) { //遍历Row,零行是标题行，直接跳过
+		tbl.rows[i].style.backgroundColor = (i % 2 == 0) ? firstColor : secondColor;
+	}
+	var cols = document.getElementsByName('col_1');
+	for (var i = 0; i < cols.length; i++) {
+		cols[i].style.backgroundColor = (i % 2 == 1) ? firstColor : secondColor;
+	}
+	cols = document.getElementsByName('col_2');
+	for (var i = 0; i < cols.length; i++) {
+		cols[i].style.backgroundColor = (i % 2 == 1) ? firstColor : secondColor;
+	}
+
+</script>
