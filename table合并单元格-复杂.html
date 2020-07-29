@@ -87,7 +87,7 @@
 					<td>否</td>
 				</tr>
 				<tr>
-					<td>软件工程2</td>
+					<td>工程2</td>
 					<td>项目生命周期</td>
 					<td>规定项目生命周期</td>
 					<td>（集成在项目计划中）</td>
@@ -113,72 +113,20 @@
 				for (var i = 0; i < processList.length; i++) {
 					var jeidunaArr = processList[i]['阶段'];
 					// console.log("jeidunaArr--", jeidunaArr);
-					str += `<tr>
-					<td rowspan='${processList[i].rowspan}'>${processList[i]['过程域']}</td>`;
+					str += `<tr><td rowspan='${processList[i]['rowspan']}'>${processList[i]['过程域']}</td>`;
 					for (var j = 0; j < jeidunaArr.length; j++) {
 						var huodongArr = jeidunaArr[j]['活动'];
-						console.log("huodongArr--", huodongArr);
-						if (j == 0) {
-							str += `<td rowspan="${jeidunaArr[j]['rowspan']}">${jeidunaArr[j]['阶段']}</td>`;
-							for (var k = 0; k < huodongArr.length; k++) {
-								var jiaofuArr = huodongArr[k]['交付物'];
-								// console.log("jiaofuArr--", jiaofuArr);
-								if (k == 0) {
-									str += `<td  rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
-									for (var m = 0; m < jiaofuArr.length; m++) {
-										if (m == 0) {
-											str += `
-										<td>${jiaofuArr[m]['交付物']}</td>
+						// console.log("huodongArr--", huodongArr);
+						str += `<td rowspan="${jeidunaArr[j]['rowspan']}">${jeidunaArr[j]['阶段']}</td>`;
+
+						for (var k = 0; k < huodongArr.length; k++) {
+							var jiaofuArr = huodongArr[k]['交付物'];
+							// console.log("jiaofuArr--", jiaofuArr);
+							str += `<td  rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
+
+							for (var m = 0; m < jiaofuArr.length; m++) {
+								str += `<td>${jiaofuArr[m]['交付物']}</td>
 										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										} else {
-											str += `<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										}
-									}
-								} else {
-									str += `<td rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
-									for (var m = 0; m < jiaofuArr.length; m++) {
-										if (m == 0) {
-											str += `
-										<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										} else {
-											str += `<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										}
-									}
-								}
-							}
-						} else {
-							str += `<tr><td rowspan="${jeidunaArr[j]['rowspan']}">${jeidunaArr[j]['阶段']}</td>`;
-							for (var k = 0; k < huodongArr.length; k++) {
-								var jiaofuArr = huodongArr[k]['交付物'];
-								// console.log("jiaofuArr--", jiaofuArr);
-								if (k == 0) {
-									str += `<td rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
-									for (var m = 0; m < jiaofuArr.length; m++) {
-										if (m == 0) {
-											str += `
-										<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										} else {
-											str += `<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										}
-									}
-								} else {
-									str += `<td rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
-									for (var m = 0; m < jiaofuArr.length; m++) {
-										if (m == 0) {
-											str += `
-										<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										} else {
-											str += `<td>${jiaofuArr[m]['交付物']}</td>
-										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
-										}
-									}
-								}
 							}
 						}
 					}
@@ -186,8 +134,6 @@
 				$('#pmprocessList').html(str);
 			}
 		});
-
-
 	</script>
 </body>
 <!--  /Body -->
