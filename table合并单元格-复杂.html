@@ -36,7 +36,7 @@
 </head>
 
 <body>
-	<p>预期效果图:</p>
+	<p>excel预期效果图:</p>
 	<img src="./images/tablepic.png" />
 
 	<!-- 代码写死是这样，但是不知道怎么返回，才能用js拼接 -->
@@ -44,51 +44,54 @@
 		<table id="tbcm1" class="table2" cellspacing="0" cellpadding="0">
 			<thead>
 				<tr>
-					<th style="text-align: center;">过程域</th>
-					<th style="text-align: center;">阶段</th>
-					<th style="text-align: center;">活动</th>
-					<th style="text-align: center;">交付物</th>
-					<th style="text-align: center;">是否裁剪</th>
+					<th>过程域</th>
+					<th>阶段</th>
+					<th>活动</th>
+					<th>交付物</th>
+					<th>是否裁剪</th>
 				</tr>
 			</thead>
 			<tbody id="pmprocessList">
 				<!-- rowspan="n",里面的数字是n，那么下面就有n-1个tr -->
 				<tr>
-					<td rowspan="8">软件工程</td>
+					<td rowspan="6">软件工程</td>
+					<td>项目生命周期</td>
+					<td>规定项目生命周期</td>
+					<td>（集成在项目计划中）</td>
+					<td>否</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">项目生命周期</td>
-					<td style="text-align: center;">规定项目生命周期</td>
-					<td style="text-align: center;">交付物</td>
-					<td style="text-align: center;">是否裁剪</td>
+					<td rowspan="2">需求</td>
+					<td>需求差异化分析</td>
+					<td>差异化分析</td>
+					<td>是</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;" rowspan="2">需求</td>
-					<td style="text-align: center;">需求差异化分析</td>
-					<td style="text-align: center;">交付物</td>
-					<td style="text-align: center;">是否裁剪</td>
+					<td>需求调研</td>
+					<td>需求调研报告</td>
+					<td>否</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">需求调研</td>
-					<td style="text-align: center;">交付物</td>
-					<td style="text-align: center;">是否裁剪</td>
+					<td rowspan="3">系统设计</td>
+					<td rowspan="2">系统设计</td>
+					<td>概要设计说明书</td>
+					<td>否</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;" rowspan="4">系统设计</td>
+					<td>详细设计说明书</td>
+					<td>否</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;" rowspan="2">系统设计</td>
-					<td style="text-align: center;">交付物</td>
-					<td style="text-align: center;">是否裁剪</td>
+					<td>设计评审</td>
+					<td>评审报告</td>
+					<td>否</td>
 				</tr>
 				<tr>
-					<td style="text-align: center;">交付物</td>
-					<td style="text-align: center;">是否裁剪</td>
-				</tr>
-				<tr>
-					<td style="text-align: center;">设计评审</td>
-					<td style="text-align: center;">交付物</td>
-					<td style="text-align: center;">是否裁剪</td>
+					<td>软件工程2</td>
+					<td>项目生命周期</td>
+					<td>规定项目生命周期</td>
+					<td>（集成在项目计划中）</td>
+					<td>否</td>
 				</tr>
 			</tbody>
 		</table>
@@ -105,20 +108,82 @@
 			dataType: 'json',
 			success: function (data) {
 				var processList = data.data;
-				console.log(processList)
+				// console.log("返回结果：---", processList)
 				var str = "";
 				for (var i = 0; i < processList.length; i++) {
+					var jeidunaArr = processList[i]['阶段'];
+					// console.log("jeidunaArr--", jeidunaArr);
 					str += `<tr>
-									<td rowspan='6'>${processList[i]['过程域']}</td>
-									<td>阶段</td>
-									<td>活动</td>
-									<td>交付物</td>
-									<td>是否裁剪</td>
-									<td>模板</td>
-									<td>是否裁剪</td>
-									<td>模板</td>
-								</tr>`
+					<td rowspan='${processList[i].rowspan}'>${processList[i]['过程域']}</td>`;
+					for (var j = 0; j < jeidunaArr.length; j++) {
+						var huodongArr = jeidunaArr[j]['活动'];
+						console.log("huodongArr--", huodongArr);
+						if (j == 0) {
+							str += `<td rowspan="${jeidunaArr[j]['rowspan']}">${jeidunaArr[j]['阶段']}</td>`;
+							for (var k = 0; k < huodongArr.length; k++) {
+								var jiaofuArr = huodongArr[k]['交付物'];
+								// console.log("jiaofuArr--", jiaofuArr);
+								if (k == 0) {
+									str += `<td  rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
+									for (var m = 0; m < jiaofuArr.length; m++) {
+										if (m == 0) {
+											str += `
+										<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										} else {
+											str += `<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										}
+									}
+								} else {
+									str += `<td rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
+									for (var m = 0; m < jiaofuArr.length; m++) {
+										if (m == 0) {
+											str += `
+										<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										} else {
+											str += `<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										}
+									}
+								}
+							}
+						} else {
+							str += `<tr><td rowspan="${jeidunaArr[j]['rowspan']}">${jeidunaArr[j]['阶段']}</td>`;
+							for (var k = 0; k < huodongArr.length; k++) {
+								var jiaofuArr = huodongArr[k]['交付物'];
+								// console.log("jiaofuArr--", jiaofuArr);
+								if (k == 0) {
+									str += `<td rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
+									for (var m = 0; m < jiaofuArr.length; m++) {
+										if (m == 0) {
+											str += `
+										<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										} else {
+											str += `<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										}
+									}
+								} else {
+									str += `<td rowspan="${huodongArr[k]['rowspan']}">${huodongArr[k]['活动']}</td>`;
+									for (var m = 0; m < jiaofuArr.length; m++) {
+										if (m == 0) {
+											str += `
+										<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										} else {
+											str += `<td>${jiaofuArr[m]['交付物']}</td>
+										<td>${jiaofuArr[m]['是否裁剪']}</td></tr>`;
+										}
+									}
+								}
+							}
+						}
+					}
 				}
+				$('#pmprocessList').html(str);
 			}
 		});
 
