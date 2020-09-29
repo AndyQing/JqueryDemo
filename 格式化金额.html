@@ -10,10 +10,24 @@
 
 <body>
     <script>
+        //格式化金额,添加逗号的:Number(value).toLocaleString('en-US')
+        console.log(Number(933232).toLocaleString('en-US'))
+
         function numFormat(num) {
             var c = (num.toString().indexOf('.') !== -1) ? num.toLocaleString() : num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
             return c;
         }
+        console.log(numFormat(20181029.120));//20,181,029.12
+        console.log(numFormat(201.10));//201.1
+
+        //tofixed重写
+        // Number.prototype.toFixed = function (s) {
+        //     var times = Math.pow(10, s);
+        //     var des = this * times + 0.5;
+        //     des = parseInt(des, 10) / times;
+        //     return des + '';
+        // };
+
         //格式化金额
         function fmoney(s, n) {
             n = n > 0 && n <= 20 ? n : 2;
@@ -26,11 +40,46 @@
             return t.split("").reverse().join("") + "." + r;
         }
 
-
-        console.log(numFormat(20181029.120));//20,181,029.12
-        console.log(numFormat(201.10));//201.1
         console.log(fmoney(20181029.120));//20,181,029.12
         console.log(fmoney(201.10));//201.10
+        console.log(fmoney(201, 4));//201.0000
+
+        //去掉 小数末尾的零
+        function cutZero(old) {
+            //拷贝一份 返回去掉零的新串
+            newstr = old;
+            //循环变量 小数部分长度
+            var leng = old.length - old.indexOf(".") - 1;
+            //判断是否有效数
+            if (old.indexOf(".") > -1) {
+                if (leng == 0) {//去掉'201.'这种数据
+                    if (newstr.charAt(newstr.length - 1) == ".") {
+                        return newstr.substring(0, newstr.length - 1);
+                    }
+                }
+                //循环小数部分
+                for (i = leng; i > 0; i--) {
+                    //如果newstr末尾有0
+                    if (newstr.lastIndexOf("0") > -1 && newstr.substr(newstr.length - 1, 1) == 0) {
+                        var k = newstr.lastIndexOf("0");
+                        //如果小数点后只有一个0 去掉小数点
+                        if (newstr.charAt(k - 1) == ".") {
+                            return newstr.substring(0, k - 1);
+                        } else {
+                            //否则 去掉一个0
+                            newstr = newstr.substring(0, k);
+                        }
+                    } else {
+                        //如果末尾没有0
+                        return newstr;
+                    }
+                }
+            }
+            return old;
+        }
+        console.log(cutZero('229.120'));//229.12
+        console.log(cutZero('201.10'));//201.1
+        console.log(cutZero('201.'));//201
     </script>
 </body>
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        li {
+            margin-top: 10px;
+            width: 32%;
+            height: 100px;
+            border: 1px solid #333333;
+            background-color: skyblue;
+        }
+
+        ul:after {
+            content: "";
+            height: 0;
+            width: 32%;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <!-- <li></li> -->
+    </ul>
+</body>
+
+</html>

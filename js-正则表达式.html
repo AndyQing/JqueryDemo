@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js常用校验</title>
+</head>
+
+<body>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        // 小括号就是括号内看成一个整体 ,中括号就是匹配括号内的其中一个
+
+        //1-验证手机号，没有10、11、12打头的手机号
+        function checkPhone(phone) {
+            // var regMobile=/^1[3456789]\d{9}$/;
+            var regMobile = /^1(3|4|5|6|7|8|9)\d{9}$/;
+            return regMobile.test(phone);
+        }
+        console.log("1-----", checkPhone('15551307128'))
+
+        //2-验证身份证,一代身份证号是15位的数字，二代身份证都是18位的，最后一位校验位除了可能是数字还可能是'X'或'x'
+        function checkIdNo(idNo) {
+            var regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            return regIdNo.test(idNo)
+        }
+        console.log("2-----", checkIdNo('34122719941012802X'))
+
+        //3-验证邮箱
+        function checkEmail(value) {
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+            return reg.test(value)
+        }
+        console.log("3-----", checkEmail('19@qq.com'))
+
+        // 精确身份证校验
+        function IdentityCodeValid(code) {
+            const city = {
+                11: '北京',
+                12: '天津',
+                13: '河北',
+                14: '山西',
+                15: '内蒙古',
+                21: '辽宁',
+                22: '吉林',
+                23: '黑龙江 ',
+                31: '上海',
+                32: '江苏',
+                33: '浙江',
+                34: '安徽',
+                35: '福建',
+                36: '江西',
+                37: '山东',
+                41: '河南',
+                42: '湖北 ',
+                43: '湖南',
+                44: '广东',
+                45: '广西',
+                46: '海南',
+                50: '重庆',
+                51: '四川',
+                52: '贵州',
+                53: '云南',
+                54: '西藏 ',
+                61: '陕西',
+                62: '甘肃',
+                63: '青海',
+                64: '宁夏',
+                65: '新疆',
+                71: '台湾',
+                81: '香港',
+                82: '澳门',
+                91: '国外'
+            }
+            let pass = true
+            // 验证身份证格式（6个地区编码，8位出生日期，3位顺序号，1位校验位）
+            if (!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(code)) {
+                pass = false
+            } else if (!city[code.substr(0, 2)]) {
+                pass = false
+            } else {
+                // 18位身份证需要验证最后一位校验位
+                if (code.length === 18) {
+                    code = code.split('')
+                    // ∑(ai×Wi)(mod 11)
+                    // 加权因子
+                    let factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+                    // 校验位
+                    let parity = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
+                    let sum = 0
+                    let ai = 0
+                    let wi = 0
+                    for (let i = 0; i < 17; i++) {
+                        ai = code[i]
+                        wi = factor[i]
+                        sum += ai * wi
+                    }
+                    if (parity[sum % 11] !== code[17]) {
+                        pass = false
+                    }
+                }
+            }
+            return pass
+        }
+        console.log("4-----", IdentityCodeValid('34122719941012802X'))
+    </script>
+</body>
+
+</html>
