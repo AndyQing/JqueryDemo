@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lodash学习</title>
+    <script src="./js/lodash.js"></script>
+</head>
+
+<body>
+    <script>
+        // 1、N次循环
+        console.log('------- javascript -------');
+        //js原生的循环方法
+        for (var i = 0; i < 5; i++) {
+            console.log(i);
+        }
+        console.log('------- lodash -------');
+        //ladash的times方法
+        _.times(5, function (a) {
+            console.log(a);
+        });
+    </script>
+
+    <script>
+        // 2、深克隆对象
+        var objA = {
+            "name": "戈德斯文"
+        };
+        var objB = _.cloneDeep(objA);
+        // objB.id = 1;
+        console.log(objA);
+        console.log(objB);
+        console.log(objA === objB);//false
+    </script>
+
+    <script>
+        // 3、扩展对象
+        var objA = { "name": "戈德斯文", "car": "宝马" };
+        var objB = { "name": "柴硕", "loveEat": true };
+        console.log(_.assign(objA, objB));//{name: "柴硕", car: "宝马", loveEat: true}
+    </script>
+    <script>
+        // 4、判断对象中是否含有某元素
+        var smartPerson = {
+            'name': '戈德斯文',
+            'gender': 'male'
+        },
+            smartTeam = ["戈德斯文", "杨海月", "柴硕", "师贝贝"];
+
+        console.log(_.includes(smartPerson, '戈德斯文'));//true
+        console.log(_.includes(smartTeam, '杨海月'));//true
+        console.log(_.includes(smartTeam, '杨海月', 2));//false
+    </script>
+    <script type="text/javascript">
+        // 创建一个新数组，包含原数组中所有的非假值元素。
+        // 例如false, null, 0, "", undefined, 和 NaN 都是被认为是“假值”。
+        console.log(_.compact([0, 1, false, 2, '', 3]));// => [1, 2, 3]
+
+
+        // 创建一个切片数组，去除array前面的n个元素。（n默认值为1。）
+        console.log(_.drop([1, 2, 3]));// => [ 2, 3]
+
+        // 使用 value 值来填充（替换） array
+        var array = [1, 2, 3];
+        _.fill(array, 'a', 1, 2);
+        console.log(array);// => [1, 'a', 3]
+
+        // 获取array数组的第n个元素
+        var array = ['a', 'b', 'c', 'd'];
+        console.log(_.nth(array, 1));// => 'b'
+        console.log(_.nth(array, -2));// => 'c';
+    </script>
+</body>
+
+</html>

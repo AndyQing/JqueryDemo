@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //对字符串扩展
+        String.prototype.ResetBlank = function () {
+            var regEx = /\s+/g;
+            return this.trim().replace(regEx, ' ');
+        };
+        var str = " 1111  1111 111   1111   1111    1111  111";
+        console.log(str.indexOf('111 1111 1111 1111'))
+        console.log(str.ResetBlank().indexOf('111 1111 1111 1111'))
+        console.log(str.length);
+        console.log(str.ResetBlank().length);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input placeholder="请输入一个整数" id="inputValue" />
+    <button onclick="showNum()">显示回文数</button>
+    <p id="num" style="word-break: break-all;"></p>
+    <script>
+        function showNum() {
+            var num = document.getElementById('num'),
+                inputValue = document.getElementById('inputValue');
+            if (!inputValue.value || Object.is(parseInt(inputValue.value), NaN)) {
+                return
+            }
+            var end = parseInt(inputValue.value)
+            inputValue.value = end;
+            num.innerHTML = palindrome(0, end).join(',')
+        }
+        function palindrome(start = 100, end = 9999) {
+            // 使用数组存储回文数
+            const palindromeNumber = [];
+            for (let i = start; i <= end; i++) {
+                let str = i.toString();
+                const radius = Math.floor(str.length / 2);
+                // 前半段数字
+                const firstHalf = str.substr(0, radius);
+                // 后半段数字
+                const secondHalf = str.substr(-radius);
+                // 前半段数字与逆序的后半段数字相等，则为一个回文数
+                // 如 12321: 12 21, 123321: 123 321
+                if (firstHalf === secondHalf.split('').reverse().join('')) {
+                    palindromeNumber.push(i);
+                }
+            }
+
+            // 区间内所有回文数
+            console.log(palindromeNumber);
+            return palindromeNumber;
+
+            // 随机取 10 个, 使用 set 保证数字不重复
+            const randomSet = new Set();
+            let length = palindromeNumber.length;
+            while (1) {
+                // 随机数有不重复的 10 个，跳出循环
+                if (randomSet.size >= 10) {
+                    break;
+                }
+                const i = Math.floor(Math.random() * length);
+                randomSet.add(palindromeNumber[i]);
+            }
+
+            // 随机的 10 个回文数
+            console.log(Array.from(randomSet));
+        }
+    </script>
+</body>
+
+</html>
